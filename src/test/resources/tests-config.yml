@@ -1,0 +1,8 @@
+# API tests configuration
+webDriver:
+  chromeWebDriver: webdriver.chrome.driver
+
+driver:
+  chromeDriver: C:/Patiuk/DriversJava/chromedriver.exe
+
+# UI tests configuration
