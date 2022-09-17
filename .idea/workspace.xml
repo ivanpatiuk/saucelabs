@@ -4,19 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd619f9f-493f-45ab-bc86-6dc8e3c3acd2" name="Changes" comment="[v1.0.2] AllureReports">
-      <change afterPath="$PROJECT_DIR$/src/test/java/apiTests/tests/SimpleTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/config/PropertyModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/config/TestConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/config/WebManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/config/pojo/Driver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/config/pojo/WebDriver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/enums/DriverEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/enums/WebDriverEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/tests-config.yml" afterDir="false" />
+    <list default="true" id="cd619f9f-493f-45ab-bc86-6dc8e3c3acd2" name="Changes" comment="[v1.0.3] Changed POM.">
+      <change afterPath="$PROJECT_DIR$/src/test/java/entities/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/testconfig/RestAssuredController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/tests/APITests/LeftSideBarCategoriesTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/tests/APITests/TestDataProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/tests/SmokeTests/OksanaTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/utils/JSONPath.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/log4j.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/apiTests/SimpleTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/apiTests/tests/SimpleTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/config/PropertyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/PropertyModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/config/TestConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/TestConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/config/WebManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testconfig/WebManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/config/pojo/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/models/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/config/pojo/WebDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/models/WebDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/enums/DriverEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/enums/WebDriverEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/tests-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/tests-config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +37,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="prod" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -54,11 +65,13 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\genda\IdeaProjects\testNGrozetka\src\test\resources" />
+      <recent name="C:\Users\genda\IdeaProjects\testNGrozetka" />
       <recent name="C:\Users\genda\IdeaProjects\testNGrozetka\src\test" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -78,64 +91,44 @@
       <command value="mvn -Dtest=**SimpleTest#setup clean test" />
       <command value="mvn -Dtest=**SimpleTest#setup clean test allure:report" />
       <command value="mvn clean -Dgroups=firstgroup test allure:report" />
-      <command value="mvn clean test allure:report" />
-      <command value="mvn allure:serve" />
-      <command value="mvn clean test" />
       <command value="mvn clean -Dgroups=firstgroup2 test allure:report" />
+      <command value="mvn clean" />
+      <command value="mvn clean test **.SmokeTest.**" />
+      <command value="mvn clean -Dtest=**.SmokeTest.** test" />
+      <command value="mvn clean test allure:report" />
+      <command value="mvn clean -Dtest=**.TestOne.** allure:serve" />
+      <command value="mvn clean -Dtest=**.TestOne.** allure:report allure:serve" />
+      <command value="mvn clean -Dtest=**.SmokeTests.** test" />
+      <command value="mvn clean test" />
+      <command value="mvn allure:serve" />
+      <command value="mvn clean test allure:serve" />
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.SimpleTest.test1">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="testNGrozetka" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="testNGrozetka" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SimpleTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="testNGrozetka" />
-      <shortenClasspath name="NONE" />
-      <useClassPathOnly />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="apiTests.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SUITE_NAME" value="" />
-      <option name="PACKAGE_NAME" value="apiTests" />
-      <option name="MAIN_CLASS_NAME" value="apiTests.tests.SimpleTest" />
-      <option name="GROUP_NAME" value="" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="PARAMETERS" value="" />
-      <option name="OUTPUT_DIRECTORY" value="" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="PROPERTIES_FILE" value="" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SimpleTest.checkComputersName" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.OksanaTest.checkPersonalDataTest">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="entities.Main" />
       <module name="testNGrozetka" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="apiTests.tests.*" />
+          <option name="PATTERN" value="entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="apiTests" />
-      <option name="MAIN_CLASS_NAME" value="apiTests.tests.SimpleTest" />
-      <option name="METHOD_NAME" value="checkComputersName" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LeftSideBarCategoriesTest.leftSideBarCategoriesTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="testNGrozetka" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.APITests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.APITests" />
+      <option name="MAIN_CLASS_NAME" value="tests.APITests.LeftSideBarCategoriesTest" />
+      <option name="METHOD_NAME" value="leftSideBarCategoriesTest" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -143,17 +136,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SimpleTest.checkLogo" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="OksanaTest.checkPersonalDataTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="testNGrozetka" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="apiTests.tests.*" />
+          <option name="PATTERN" value="tests.SmokeTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="apiTests" />
-      <option name="MAIN_CLASS_NAME" value="apiTests.tests.SimpleTest" />
-      <option name="METHOD_NAME" value="checkLogo" />
+      <option name="PACKAGE_NAME" value="tests.SmokeTests" />
+      <option name="MAIN_CLASS_NAME" value="tests.SmokeTests.OksanaTest" />
+      <option name="METHOD_NAME" value="checkPersonalDataTest" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -161,17 +154,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SimpleTest.test1" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TestOne.badNameTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="testNGrozetka" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="apiTests.tests.*" />
+          <option name="PATTERN" value="tests.APITests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="apiTests" />
-      <option name="MAIN_CLASS_NAME" value="apiTests.tests.SimpleTest" />
-      <option name="METHOD_NAME" value="test1" />
+      <option name="PACKAGE_NAME" value="tests.APITests" />
+      <option name="MAIN_CLASS_NAME" value="tests.APITests.TestOne" />
+      <option name="METHOD_NAME" value="badNameTest" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -179,17 +172,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SimpleTest.test3" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="test.testTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="testNGrozetka" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="apiTests.tests.*" />
+          <option name="PATTERN" value="tests.SmokeTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="apiTests.tests" />
-      <option name="MAIN_CLASS_NAME" value="apiTests.tests.SimpleTest" />
-      <option name="METHOD_NAME" value="test3" />
+      <option name="PACKAGE_NAME" value="tests.APITests" />
+      <option name="MAIN_CLASS_NAME" value="tests.APITests.test" />
+      <option name="METHOD_NAME" value="testTest" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -198,19 +191,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="TestNG.SimpleTest.test3" />
-      <item itemvalue="TestNG.SimpleTest.checkComputersName" />
-      <item itemvalue="TestNG.SimpleTest.checkLogo" />
-      <item itemvalue="TestNG.SimpleTest.test1" />
-      <item itemvalue="TestNG.SimpleTest" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="TestNG.LeftSideBarCategoriesTest.leftSideBarCategoriesTest" />
+      <item itemvalue="TestNG.TestOne.badNameTest" />
+      <item itemvalue="TestNG.OksanaTest.checkPersonalDataTest" />
+      <item itemvalue="TestNG.test.testTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.SimpleTest.test1" />
-        <item itemvalue="TestNG.SimpleTest.test3" />
-        <item itemvalue="TestNG.SimpleTest.checkComputersName" />
-        <item itemvalue="TestNG.SimpleTest" />
-        <item itemvalue="TestNG.SimpleTest.checkLogo" />
+        <item itemvalue="TestNG.OksanaTest.checkPersonalDataTest" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="TestNG.TestOne.badNameTest" />
+        <item itemvalue="TestNG.LeftSideBarCategoriesTest.leftSideBarCategoriesTest" />
+        <item itemvalue="TestNG.test.testTest" />
       </list>
     </recent_temporary>
   </component>
@@ -236,7 +229,19 @@
       <workItem from="1659208704395" duration="300000" />
       <workItem from="1659256986956" duration="9587000" />
       <workItem from="1659622251387" duration="3736000" />
-      <workItem from="1659889055804" duration="1705000" />
+      <workItem from="1659889055804" duration="12669000" />
+      <workItem from="1659985783623" duration="3841000" />
+      <workItem from="1659991640572" duration="952000" />
+      <workItem from="1660335545741" duration="10859000" />
+      <workItem from="1660415314674" duration="84000" />
+      <workItem from="1660478264964" duration="736000" />
+      <workItem from="1660499679838" duration="5354000" />
+      <workItem from="1660650823284" duration="70000" />
+      <workItem from="1660669195447" duration="156000" />
+      <workItem from="1660818013105" duration="3700000" />
+      <workItem from="1660945852842" duration="144000" />
+      <workItem from="1661333770761" duration="767000" />
+      <workItem from="1661610221973" duration="35000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1658587345126</created>
@@ -252,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659092107495</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="[v1.0.3] Changed POM.">
+      <created>1659890863380</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1659890863380</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,7 +288,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial" />
     <MESSAGE value="[v1.0.2] AllureReports" />
-    <option name="LAST_COMMIT_MESSAGE" value="[v1.0.2] AllureReports" />
+    <MESSAGE value="[v1.0.3] Changed POM." />
+    <option name="LAST_COMMIT_MESSAGE" value="[v1.0.3] Changed POM." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

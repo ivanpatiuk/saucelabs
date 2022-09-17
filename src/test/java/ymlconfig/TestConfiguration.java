@@ -1,4 +1,4 @@
-package config;
+package ymlconfig;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -10,22 +10,18 @@ public class TestConfiguration {
     private static final String CONFIGURATION_FILE_PATH = "src/test/resources/tests-config.yml";
     private static PropertyModel properties;
 
-    public static PropertyModel getProperties() {
-        if (properties == null) {
-            properties = readProperties();
-        }
-        return properties;
-
-    }
-    private static PropertyModel readProperties() {
+    static {
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             mapper.findAndRegisterModules();
             PropertyModel propertyModel = mapper.readValue(new File(CONFIGURATION_FILE_PATH), PropertyModel.class);
-            return propertyModel;
+            properties = propertyModel;
         } catch (IOException e){
             e.printStackTrace();
-            return null;
         }
+    }
+
+    public static PropertyModel getProperties(){
+        return properties;
     }
 }

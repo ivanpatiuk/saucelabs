@@ -13,6 +13,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <maven-surefire-plugin-version>3.0.0-M5</maven-surefire-plugin-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <apache-poi-version>5.2.2</apache-poi-version>
         <aspectj.version>1.9.9.1</aspectj.version>
         <allure-maven-version>2.11.2</allure-maven-version>
         <allure-testng-version>2.18.1</allure-testng-version>
@@ -22,7 +23,7 @@
         <log4j-version>2.17.2</log4j-version>
         <lombok-version>1.18.24</lombok-version>
         <jackson-version>2.13.3</jackson-version>
-        <json-path-version>5.1.1</json-path-version>
+        <json-path-version>2.7.0</json-path-version>
         <rest-assured-version>5.1.1</rest-assured-version>
     </properties>
     <dependencies>
@@ -53,7 +54,16 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j-version}</version>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jcabi</groupId>
+            <artifactId>jcabi-log</artifactId>
+            <version>0.21.0</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -93,11 +103,24 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.rest-assured</groupId>
+            <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <version>${json-path-version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Reading Excel -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${apache-poi-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${apache-poi-version}</version>
+        </dependency>
+        <!-- Reading Excel -->
     </dependencies>
 
     <build>
@@ -122,9 +145,9 @@
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+<!--                    <suiteXmlFiles>-->
+<!--                        <suiteXmlFile>testng.xml</suiteXmlFile>-->
+<!--                    </suiteXmlFiles>-->
                 </configuration>
                 <dependencies>
                     <dependency>

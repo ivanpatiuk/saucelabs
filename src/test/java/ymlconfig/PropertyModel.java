@@ -1,9 +1,9 @@
-package config;
+package ymlconfig;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import config.pojo.Driver;
-import config.pojo.WebDriver;
+import ymlconfig.models.Driver;
+import ymlconfig.models.WebDriver;
 import lombok.Data;
 
 @Data
@@ -15,4 +15,7 @@ public class PropertyModel {
 
     @JsonProperty("driver")
     private Driver driver;
+
+    @JsonProperty("testSiteAddress")
+    private String testSiteAddress;
 }
