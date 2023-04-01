@@ -1,8 +1,8 @@
-webDriver:
-  chromeWebDriver: webdriver.chrome.driver
+web-driver:
+  chrome-web-driver: webdriver.chrome.driver
 
 driver:
-  chromeDriver: C:/Patiuk/DriversJava/chromedriver.exe
+  chrome-driver: C:/Patiuk/DriversJava/chromedriver.exe
 
-testSiteAddress: https://rozetka.com.ua/ua/
+test-site-address: https://www.saucedemo.com/
 

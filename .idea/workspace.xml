@@ -4,24 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd619f9f-493f-45ab-bc86-6dc8e3c3acd2" name="Changes" comment="[v1.0.3] Changed POM.">
-      <change afterPath="$PROJECT_DIR$/src/test/java/entities/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testconfig/RestAssuredController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/tests/APITests/LeftSideBarCategoriesTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/tests/APITests/TestDataProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/tests/SmokeTests/OksanaTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/utils/JSONPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/log4j.properties" afterDir="false" />
+    <list default="true" id="cd619f9f-493f-45ab-bc86-6dc8e3c3acd2" name="Changes" comment="[v3.0.0 stable] Added base logic, updated driver, refactored structure.">
+      <change afterPath="$PROJECT_DIR$/src/test/java/listeners/RetryAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/listeners/TestListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pages/MainPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/tests/UITests/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/apiTests/tests/SimpleTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/config/PropertyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/PropertyModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/config/TestConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/TestConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/config/WebManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testconfig/WebManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/config/pojo/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/models/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/config/pojo/WebDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/models/WebDriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/enums/DriverEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/enums/WebDriverEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/entities/Student.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/testconfig/WebManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testconfig/WebManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/APITests/LeftSideBarCategoriesTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/APITests/TestDataProvider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ymlconfig/PropertyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/PropertyModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ymlconfig/TestConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/TestConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ymlconfig/models/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/models/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ymlconfig/models/WebDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ymlconfig/models/WebDriver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/tests-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/tests-config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,20 +51,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_directory_selection&quot;: &quot;/home/ivan-patiuk/IdeaProjects/testNG/src/test/java&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_directory_selection": "/home/ivan-patiuk/IdeaProjects/testNG/src/test/java",
+    "last_opened_file_path": "C:/Users/genda/IdeaProjects/saucelabs",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\genda\IdeaProjects\testNGrozetka\src\test\resources" />
@@ -104,13 +106,13 @@
       <command value="mvn clean test allure:serve" />
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.OksanaTest.checkPersonalDataTest">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="entities.Main" />
-      <module name="testNGrozetka" />
+  <component name="RunManager" selected="TestNG.LoginTest.loginStandardUserShouldSuccessTest">
+    <configuration name="LoginTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tests.UITests.LoginTest" />
+      <module name="saucelabs" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="entities.*" />
+          <option name="PATTERN" value="tests.UITests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -118,8 +120,54 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LeftSideBarCategoriesTest.leftSideBarCategoriesTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="testNGrozetka" />
+    <configuration name="C:/Users/genda/IdeaProjects/testNGrozetka/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="saucelabs" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginTest.loginStandardUserShouldSuccessTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="saucelabs" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.UITests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.UITests" />
+      <option name="MAIN_CLASS_NAME" value="tests.UITests.LoginTest" />
+      <option name="METHOD_NAME" value="loginStandardUserShouldSuccessTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginTest.loginTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="saucelabs" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.UITests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.UITests" />
+      <option name="MAIN_CLASS_NAME" value="tests.UITests.LoginTest" />
+      <option name="METHOD_NAME" value="loginTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestClass.myTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="saucelabs" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="tests.APITests.*" />
@@ -127,62 +175,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests.APITests" />
-      <option name="MAIN_CLASS_NAME" value="tests.APITests.LeftSideBarCategoriesTest" />
-      <option name="METHOD_NAME" value="leftSideBarCategoriesTest" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OksanaTest.checkPersonalDataTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="testNGrozetka" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.SmokeTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.SmokeTests" />
-      <option name="MAIN_CLASS_NAME" value="tests.SmokeTests.OksanaTest" />
-      <option name="METHOD_NAME" value="checkPersonalDataTest" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestOne.badNameTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="testNGrozetka" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.APITests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.APITests" />
-      <option name="MAIN_CLASS_NAME" value="tests.APITests.TestOne" />
-      <option name="METHOD_NAME" value="badNameTest" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test.testTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="testNGrozetka" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.SmokeTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.APITests" />
-      <option name="MAIN_CLASS_NAME" value="tests.APITests.test" />
-      <option name="METHOD_NAME" value="testTest" />
+      <option name="MAIN_CLASS_NAME" value="tests.APITests.TestClass" />
+      <option name="METHOD_NAME" value="myTest" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -191,21 +185,25 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="TestNG.LeftSideBarCategoriesTest.leftSideBarCategoriesTest" />
-      <item itemvalue="TestNG.TestOne.badNameTest" />
-      <item itemvalue="TestNG.OksanaTest.checkPersonalDataTest" />
-      <item itemvalue="TestNG.test.testTest" />
+      <item itemvalue="Application.LoginTest" />
+      <item itemvalue="TestNG.LoginTest.loginStandardUserShouldSuccessTest" />
+      <item itemvalue="TestNG.C:/Users/genda/IdeaProjects/testNGrozetka/testng.xml" />
+      <item itemvalue="TestNG.TestClass.myTest" />
+      <item itemvalue="TestNG.LoginTest.loginTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.OksanaTest.checkPersonalDataTest" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="TestNG.TestOne.badNameTest" />
-        <item itemvalue="TestNG.LeftSideBarCategoriesTest.leftSideBarCategoriesTest" />
-        <item itemvalue="TestNG.test.testTest" />
+        <item itemvalue="TestNG.LoginTest.loginStandardUserShouldSuccessTest" />
+        <item itemvalue="Application.LoginTest" />
+        <item itemvalue="TestNG.LoginTest.loginTest" />
+        <item itemvalue="TestNG.TestClass.myTest" />
+        <item itemvalue="TestNG.C:/Users/genda/IdeaProjects/testNGrozetka/testng.xml" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SeleniumInternalSettingsState">
+    <option name="lastFrameworkName" value="Selenium" />
+    <option name="lastLanguageId" value="JAVA" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -242,6 +240,19 @@
       <workItem from="1660945852842" duration="144000" />
       <workItem from="1661333770761" duration="767000" />
       <workItem from="1661610221973" duration="35000" />
+      <workItem from="1663402160816" duration="5828000" />
+      <workItem from="1663491874130" duration="14000" />
+      <workItem from="1663601428200" duration="1476000" />
+      <workItem from="1663702546833" duration="191000" />
+      <workItem from="1664206119695" duration="16000" />
+      <workItem from="1668444197301" duration="298000" />
+      <workItem from="1670189314672" duration="203000" />
+      <workItem from="1670272431147" duration="663000" />
+      <workItem from="1671568030188" duration="3733000" />
+      <workItem from="1673605691650" duration="1738000" />
+      <workItem from="1674805148831" duration="350000" />
+      <workItem from="1676371464553" duration="25000" />
+      <workItem from="1680367373374" duration="2185000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1658587345126</created>
@@ -264,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659890863380</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[v2.0.0] Update">
+      <created>1663402273077</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663402273077</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,7 +307,9 @@
     <MESSAGE value="initial" />
     <MESSAGE value="[v1.0.2] AllureReports" />
     <MESSAGE value="[v1.0.3] Changed POM." />
-    <option name="LAST_COMMIT_MESSAGE" value="[v1.0.3] Changed POM." />
+    <MESSAGE value="[v2.0.0] Update" />
+    <MESSAGE value="[v3.0.0 stable] Added base logic, updated driver, refactored structure." />
+    <option name="LAST_COMMIT_MESSAGE" value="[v3.0.0 stable] Added base logic, updated driver, refactored structure." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

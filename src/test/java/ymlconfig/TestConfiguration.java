@@ -14,8 +14,7 @@ public class TestConfiguration {
         try {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             mapper.findAndRegisterModules();
-            PropertyModel propertyModel = mapper.readValue(new File(CONFIGURATION_FILE_PATH), PropertyModel.class);
-            properties = propertyModel;
+            properties = mapper.readValue(new File(CONFIGURATION_FILE_PATH), PropertyModel.class);
         } catch (IOException e){
             e.printStackTrace();
         }

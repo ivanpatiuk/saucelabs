@@ -10,12 +10,12 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PropertyModel {
 
-    @JsonProperty("webDriver")
+    @JsonProperty("web-driver")
     private WebDriver webDriver;
 
     @JsonProperty("driver")
     private Driver driver;
 
-    @JsonProperty("testSiteAddress")
+    @JsonProperty("test-site-address")
     private String testSiteAddress;
 }

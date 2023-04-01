@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class WebDriver {
-    @JsonProperty("chromeWebDriver")
+    @JsonProperty("chrome-web-driver")
     private String chromeWebDriver;
 }
