@@ -6,7 +6,7 @@ import testconfig.WebManager;
 
 import static testconfig.WebManager.getChromeDriver;
 
-public abstract class Base {
+public abstract class BaseTest {
 
     protected WebDriver driver;
 

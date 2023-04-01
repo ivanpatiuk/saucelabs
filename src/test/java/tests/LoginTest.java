@@ -7,7 +7,7 @@ import pages.HomePage;
 import pages.ShopPage;
 import ymlconfig.TestConfiguration;
 
-public class LoginTest extends Base {
+public class LoginTest extends BaseTest {
 
     @Test
     void loginStandardUserShouldSuccessTest()  {
