@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.patiuk</groupId>
-    <artifactId>testNGrozetka</artifactId>
-    <version>1.0.3</version>
+    <artifactId>saucelabs</artifactId>
+    <version>4.0.0</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

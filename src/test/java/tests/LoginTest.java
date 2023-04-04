@@ -1,41 +1,47 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.testng.Assert;
-import org.testng.annotations.*;
-import pages.HomePage;
-import pages.ShopPage;
-import ymlconfig.TestConfiguration;
+import org.testng.annotations.Test;
+import utils.Verify;
+
+import static entities.TestVariables.*;
+import static steps.Home.login;
+import static utils.Verify.*;
 
 public class LoginTest extends BaseTest {
 
-    @Test
-    void loginStandardUserShouldSuccessTest()  {
-        HomePage homePage = new HomePage(driver);
-        homePage.enterUsername(TestConfiguration.getProperties().getUsersCredentials().getStandardUserName());
-        homePage.enterPassword(TestConfiguration.getProperties().getUsersCredentials().getPassword());
-
-        long startTime = System.currentTimeMillis();
-        ShopPage shopPage = homePage.clickOnLoginButton();
-        long endTime = System.currentTimeMillis();
-
-        String url = shopPage.getDriver().getCurrentUrl();
-        Assert.assertTrue(endTime-startTime < 500);
-        Assert.assertEquals(url, "https://www.saucedemo.com/inventory.html");
+    @Test(groups = "login")
+    void loginStandardUserShouldSuccessTest() {
+        login(driver, STANDARD_USERNAME, VALID_PASSWORD);
+        verifyUrl(driver, SHOP_PAGE_URL);
     }
 
-    @Test
-    void loginLockedOutUserShouldFailTest()  {
-        HomePage homePage = new HomePage(driver);
-        homePage.enterUsername(TestConfiguration.getProperties().getUsersCredentials().getLockedOutUserName());
-        homePage.enterPassword(TestConfiguration.getProperties().getUsersCredentials().getPassword());
+    @Test(groups = "login")
+    void loginStandardUserShouldFailTest() {
+        login(driver, STANDARD_USERNAME, NOT_VALID_PASSWORD);
+        verifyUrl(driver, HOME_PAGE_URL);
+        verifyTextContains(driver,
+                "//*[@id=\"login_button_container\"]//*[@data-test=\"error\"]",
+                "Epic sadface: Username and password do not match any user in this service");
+    }
 
-        long startTime = System.currentTimeMillis();
-        ShopPage shopPage = homePage.clickOnLoginButton();
-        long endTime = System.currentTimeMillis();
+    @Test(groups = "login")
+    void loginLockedOutUserShouldReturnErrorTest() {
+        login(driver, LOCKED_OUT_USERNAME, VALID_PASSWORD);
+        verifyUrl(driver, HOME_PAGE_URL);
+        verifyTextContains(driver,
+                "//*[@id=\"login_button_container\"]//div[@class=\"error-message-container error\"]//h3",
+                "Epic sadface: Sorry, this user has been locked out.");
+    }
 
-        String errorMessage = shopPage.getDriver().findElement(By.xpath("//*[@id=\"login_button_container\"]//div[@class=\"error-message-container error\"]//h3")).getText();
-        Assert.assertTrue(endTime-startTime < 100);
-        Assert.assertEquals(errorMessage, "Epic sadface: Sorry, this user has been locked out.");
+    @Test(groups = "login")
+    void loginProblemUserShouldSuccessTest() {
+        login(driver, PROBLEM_USERNAME, VALID_PASSWORD);
+        verifyUrl(driver, SHOP_PAGE_URL);
+    }
+
+    @Test(groups = {"login", "performance"})
+    void loginPerformanceGlitchUserShouldFailTest() {
+        verifyTime(() -> login(driver, PERFORMANCE_GLITCH_USERNAME, VALID_PASSWORD), ONE_SECOND);
+        verifyUrl(driver, SHOP_PAGE_URL);
     }
 }
