@@ -1,12 +1,16 @@
 package pages;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import utils.BaseDriver;
 
 import static entities.TestVariables.ONE_SECOND;
 
-public class HomePage extends Page {
+@Getter
+public class HomePage extends BaseDriver {
 
     @FindBy(xpath = "//*[@id=\"user-name\"]")
     private WebElement username;
@@ -17,6 +21,7 @@ public class HomePage extends Page {
 
     public HomePage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     public void enterUsername(final String string) {
