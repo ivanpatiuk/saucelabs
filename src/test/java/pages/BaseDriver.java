@@ -1,7 +1,6 @@
-package utils;
+package pages;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import static entities.TestVariables.ONE_SECOND;
 
-@NoArgsConstructor
 @AllArgsConstructor
 public class BaseDriver {
     protected WebDriver driver;

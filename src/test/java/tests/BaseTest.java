@@ -1,7 +1,5 @@
 package tests;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
