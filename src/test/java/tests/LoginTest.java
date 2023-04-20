@@ -2,6 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 import steps.Home;
+import steps.Shop;
 
 import static entities.TestVariables.*;
 
@@ -11,6 +12,15 @@ public class LoginTest extends BaseTest {
     void loginStandardUserTestShouldSuccess() {
         Home home = new Home(driver);
         home.successfulLogin(STANDARD_USERNAME, VALID_PASSWORD);
+    }
+
+    @Test(groups = "login")
+    void logoutStandardUserTestShouldSuccess() {
+        Home home = new Home(driver);
+        home.successfulLogin(STANDARD_USERNAME, VALID_PASSWORD);
+
+        Shop shop = new Shop(driver);
+        shop.logout();
     }
 
     @Test(groups = "login")

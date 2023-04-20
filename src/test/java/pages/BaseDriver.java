@@ -15,7 +15,7 @@ import java.util.List;
 import static entities.TestVariables.ONE_SECOND;
 
 @AllArgsConstructor
-public class BaseDriver {
+public abstract class BaseDriver {
     protected WebDriver driver;
 
     public WebDriverWait getWait(final long millis) {

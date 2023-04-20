@@ -14,9 +14,15 @@ import static entities.TestVariables.ONE_SECOND;
 @Getter
 public class ShopPage extends BaseDriver {
 
-    private final By selectOrderingButton = By.xpath("//*[@id=\"header_container\"]//select");
-    @FindBy(xpath = "//*[@id=\"shopping_cart_container\"]/a")
+    @FindBy(xpath = "//div[@id='shopping_cart_container']/a")
     private WebElement shoppingCartButton;
+    @FindBy(xpath = "//button[@id='react-burger-menu-btn']")
+    private WebElement sidebar;
+    @FindBy(xpath = "//a[@id='logout_sidebar_link']")
+    private WebElement logout;
+
+    private final By inventoryItemsDescription = By.xpath("//div[@class='inventory_list']//div[@class='inventory_item_desc']");
+    private final By selectOrderingButton = By.xpath("//*[@id=\"header_container\"]//select");
 
     public ShopPage(WebDriver driver) {
         super(driver);
@@ -37,5 +43,15 @@ public class ShopPage extends BaseDriver {
     public void clickOnCart(){
         waitUntilClickable(shoppingCartButton, ONE_SECOND);
         shoppingCartButton.click();
+    }
+
+    public void clickOnSideBar(){
+        waitUntilClickable(sidebar, ONE_SECOND);
+        sidebar.click();
+    }
+
+    public void clickOnLogout(){
+        waitUntilClickable(logout, ONE_SECOND);
+        logout.click();
     }
 }
