@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 public class UsersCredentials {
-    @JsonProperty("standard-user-name")
-    private String standardUserName;
     @JsonProperty("tested-user-name")
     private String testedUserName;
+    @JsonProperty("standard-user-name")
+    private String standardUserName;
     @JsonProperty("locked-out-user-name")
     private String lockedOutUserName;
     @JsonProperty("problem-user-name")

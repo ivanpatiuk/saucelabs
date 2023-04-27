@@ -15,6 +15,9 @@ public class TestConfiguration {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             mapper.findAndRegisterModules();
             properties = mapper.readValue(new File(CONFIGURATION_FILE_PATH), PropertyModel.class);
+            if(System.getProperty("tested-user-name") != null){
+                properties.getUsersCredentials().setTestedUserName(System.getProperty("tested-user-name"));
+            }
         } catch (IOException e){
             e.printStackTrace();
         }

@@ -34,16 +34,11 @@ public class Home extends HomePage {
 
     @Step
     public void successfulLogin(final String username, final String password) {
-        try {
             login(username, password);
             waitUntilInvisible(By.xpath("//div[@class=\"login_container\"]"), ONE_SECOND);
             verifyUrl(SHOP_PAGE_URL);
             verifyTextContains(By.xpath("//div[@id=\"header_container\"]//div[@class=\"app_logo\"]"), "Swag Labs");
             verifyTextContains(By.xpath("//footer//div[@class=\"footer_copy\"]"), "© 2023 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy");
             verifyTextContains(By.xpath("//div[@class=\"header_secondary_container\"]//span[@class=\"title\"]"), "Products");
-        } catch (Exception e) {
-            System.out.printf("login as %s failed", username);
-            throw e;
-        }
     }
 }
