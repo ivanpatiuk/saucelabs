@@ -1,12 +1,11 @@
 package testconfig;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.BeforeSuite;
 import ymlconfig.TestConfiguration;
 
 import java.time.Duration;
@@ -30,8 +29,6 @@ public class WebManager {
     }
 
     public static void setupChromeDriver() {
-        final String chromeWebDriverProperty = TestConfiguration.getProperties().getWebDriver().getChromeWebDriver();
-        final String chromeDriverPath = TestConfiguration.getProperties().getDriver().getChromeDriver();
-        System.setProperty(chromeWebDriverProperty, chromeDriverPath);
+        WebDriverManager.chromedriver().setup();
     }
 }
