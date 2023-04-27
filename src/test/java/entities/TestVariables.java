@@ -5,6 +5,7 @@ import ymlconfig.TestConfiguration;
 import java.util.Scanner;
 
 public class TestVariables {
+    public static final String TESTED_USER_NAME = TestConfiguration.getProperties().getUsersCredentials().getTestedUserName();
     public static final String STANDARD_USERNAME = TestConfiguration.getProperties().getUsersCredentials().getStandardUserName();
     public static final String LOCKED_OUT_USERNAME = TestConfiguration.getProperties().getUsersCredentials().getLockedOutUserName();
     public static final String PROBLEM_USERNAME = TestConfiguration.getProperties().getUsersCredentials().getProblemUserName();

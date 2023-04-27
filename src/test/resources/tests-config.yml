@@ -7,6 +7,7 @@ driver:
 test-site-address: https://www.saucedemo.com/
 
 users-credentials:
+  tested-user-name: standard_user
   standard-user-name: standard_user
   locked-out-user-name: locked_out_user
   problem-user-name: problem_user

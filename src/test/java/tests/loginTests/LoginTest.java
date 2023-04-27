@@ -1,8 +1,9 @@
-package tests;
+package tests.loginTests;
 
 import org.testng.annotations.Test;
 import steps.Home;
 import steps.Shop;
+import tests.BaseTest;
 
 import static entities.TestVariables.*;
 
@@ -40,7 +41,6 @@ public class LoginTest extends BaseTest {
         Home home = new Home(driver);
         home.successfulLogin(PROBLEM_USERNAME, VALID_PASSWORD);
     }
-
 //    @Test(groups = {"login", "performance"})
 //    void loginPerformanceGlitchUserShouldFailTest() {
 //        login(driver, PERFORMANCE_GLITCH_USERNAME, VALID_PASSWORD);
