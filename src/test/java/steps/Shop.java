@@ -4,10 +4,12 @@ import com.google.common.collect.Ordering;
 import entities.OrderingTestData;
 import io.netty.util.internal.StringUtil;
 import lombok.Getter;
+import models.ItemDTO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import pages.ItemPage;
 import pages.ShopPage;
 
 import java.util.Collections;
@@ -67,5 +69,30 @@ public class Shop extends ShopPage {
     public void verifyDescription() {
         final List<String> itemsDescription = getElementsText(this, getInventoryItemsDescription());
         itemsDescription.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description)));
+    }
+
+    public void verifyItemsOpening(final List<WebElement> items) {
+        final List<String> itemTitles = findElementsBy(By.xpath("//div[@class='inventory_list']//div[@class='inventory_item_name']"), ONE_SECOND).stream().map(WebElement::getText).toList();
+        itemTitles.forEach(itemTitle -> {
+            final WebElement itemFromShopPage = findElementBy(By.xpath("//div[@class='inventory_item_label']//div[contains(text(), '" + itemTitle + "')]/ancestor::div[@class='inventory_item']"), ONE_SECOND);
+            final ItemDTO itemBeforeClicking = ItemDTO.getItemDTO(
+                    itemFromShopPage,
+                    By.xpath("//div[@class='inventory_item_label']//div[@class='inventory_item_name']"),
+                    By.xpath("//div[@class='inventory_item_label']//div[@class='inventory_item_desc']"),
+                    By.xpath("//div[@class='pricebar']//div[@class='inventory_item_price']"));
+            final WebElement titleButton = findElementBy(By.xpath("//div[@class='inventory_item_label']/a[contains(@id,'link')]"), ONE_SECOND);
+            waitUntilClickable(titleButton, ONE_SECOND);
+            titleButton.click();
+
+            final ItemPage itemPage = new ItemPage(driver);
+            WebElement itemFromItemPage = itemPage.getItem();
+            final ItemDTO itemAfterClicking = ItemDTO.getItemDTO(
+                    itemFromItemPage,
+                    By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_name')]"),
+                    By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_desc')]"),
+                    By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_price')]"));
+            itemPage.clickOnBackToProductsButton();
+            Assert.assertEquals(itemAfterClicking, itemBeforeClicking);
+        });
     }
 }

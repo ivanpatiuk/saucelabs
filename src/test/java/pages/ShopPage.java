@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import utils.BaseDriver;
 
+import java.util.List;
+
 import static entities.TestVariables.ONE_SECOND;
 
 @Getter
@@ -20,6 +22,8 @@ public class ShopPage extends BaseDriver {
     private WebElement sidebar;
     @FindBy(xpath = "//a[@id='logout_sidebar_link']")
     private WebElement logout;
+    @FindBy(xpath = "//div[@class='inventory_list']//div[@class='inventory_item']")
+    private List<WebElement> items;
 
     private final By inventoryItemsDescription = By.xpath("//div[@class='inventory_list']//div[@class='inventory_item_desc']");
     private final By selectOrderingButton = By.xpath("//*[@id=\"header_container\"]//select");
