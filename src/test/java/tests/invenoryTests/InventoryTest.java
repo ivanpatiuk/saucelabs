@@ -1,17 +1,12 @@
 package tests.invenoryTests;
 
 import entities.OrderingTestData;
-import models.ItemDTO;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import steps.Shop;
 import tests.LoggedUserBaseTest;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static entities.TestVariables.*;
 
 public class InventoryTest extends LoggedUserBaseTest {
 
@@ -36,8 +31,8 @@ public class InventoryTest extends LoggedUserBaseTest {
     }
 
     @Test
-    void openingItemTestShouldSuccess(){
+    void openingItemTestShouldSuccess() {
         Shop shop = new Shop(driver);
-        shop.verifyItemsOpening(shop.getItems());
+        shop.verifyItemsOpening();
     }
 }

@@ -71,9 +71,10 @@ public class Shop extends ShopPage {
         itemsDescription.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description)));
     }
 
-    public void verifyItemsOpening(final List<WebElement> items) {
+    public void verifyItemsOpening() {
         final List<String> itemTitles = findElementsBy(By.xpath("//div[@class='inventory_list']//div[@class='inventory_item_name']"), ONE_SECOND).stream().map(WebElement::getText).toList();
         itemTitles.forEach(itemTitle -> {
+            // CREATE ITEM BEFORE CLICKING
             final WebElement itemFromShopPage = findElementBy(By.xpath("//div[@class='inventory_item_label']//div[contains(text(), '" + itemTitle + "')]/ancestor::div[@class='inventory_item']"), ONE_SECOND);
             final ItemDTO itemBeforeClicking = ItemDTO.getItemDTO(
                     itemFromShopPage,
@@ -81,9 +82,11 @@ public class Shop extends ShopPage {
                     By.xpath("//div[@class='inventory_item_label']//div[@class='inventory_item_desc']"),
                     By.xpath("//div[@class='pricebar']//div[@class='inventory_item_price']"));
             final WebElement titleButton = findElementBy(By.xpath("//div[@class='inventory_item_label']/a[contains(@id,'link')]"), ONE_SECOND);
+
             waitUntilClickable(titleButton, ONE_SECOND);
             titleButton.click();
 
+            // CREATE ITEM AFTER CLICKING
             final ItemPage itemPage = new ItemPage(driver);
             WebElement itemFromItemPage = itemPage.getItem();
             final ItemDTO itemAfterClicking = ItemDTO.getItemDTO(
@@ -91,6 +94,8 @@ public class Shop extends ShopPage {
                     By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_name')]"),
                     By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_desc')]"),
                     By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_price')]"));
+
+            // MOVE TO THE SHOP PAGE AND ASSERT
             itemPage.clickOnBackToProductsButton();
             Assert.assertEquals(itemAfterClicking, itemBeforeClicking);
         });
