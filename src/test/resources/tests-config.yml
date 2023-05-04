@@ -1,9 +1,3 @@
-web-driver:
-  chrome-web-driver: webdriver.chrome.driver
-
-driver:
-  chrome-driver: C:/Patiuk/DriversJava/chromedriver.exe
-
 test-site-address: https://www.saucedemo.com/
 
 users-credentials:
