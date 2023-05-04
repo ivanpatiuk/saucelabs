@@ -1,6 +1,7 @@
 package steps;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.HomePage;
@@ -8,6 +9,7 @@ import pages.HomePage;
 import static entities.TestVariables.*;
 
 
+@Log4j2
 public class Home extends HomePage {
 
     public Home(WebDriver driver) {
@@ -16,6 +18,7 @@ public class Home extends HomePage {
 
     public void login(final String username, final String password) {
         try {
+            log.debug("Called login username: {}", username);
             enterUsername(username);
             enterPassword(password);
             clickOnLoginButton();
@@ -26,7 +29,8 @@ public class Home extends HomePage {
     }
 
     @Step
-    public void unsuccessfulLogin(final String username, final String password){
+    public void unsuccessfulLogin(final String username, final String password) {
+        log.debug("Called unsuccessful login");
         login(username, password);
         verifyUrl(HOME_PAGE_URL);
         verifyTextContains(getErrorMessage(), "Epic sadface");
@@ -34,11 +38,12 @@ public class Home extends HomePage {
 
     @Step
     public void successfulLogin(final String username, final String password) {
-            login(username, password);
-            waitUntilInvisible(By.xpath("//div[@class=\"login_container\"]"), ONE_SECOND);
-            verifyUrl(SHOP_PAGE_URL);
-            verifyTextContains(By.xpath("//div[@id=\"header_container\"]//div[@class=\"app_logo\"]"), "Swag Labs");
-            verifyTextContains(By.xpath("//footer//div[@class=\"footer_copy\"]"), "© 2023 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy");
-            verifyTextContains(By.xpath("//div[@class=\"header_secondary_container\"]//span[@class=\"title\"]"), "Products");
+        log.debug("Called successful login");
+        login(username, password);
+        waitUntilInvisible(By.xpath("//div[@class=\"login_container\"]"), ONE_SECOND);
+        verifyUrl(SHOP_PAGE_URL);
+        verifyTextContains(By.xpath("//div[@id=\"header_container\"]//div[@class=\"app_logo\"]"), "Swag Labs");
+        verifyTextContains(By.xpath("//footer//div[@class=\"footer_copy\"]"), "© 2023 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy");
+        verifyTextContains(By.xpath("//div[@class=\"header_secondary_container\"]//span[@class=\"title\"]"), "Products");
     }
 }

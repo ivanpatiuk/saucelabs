@@ -1,6 +1,7 @@
 package pages;
 
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import static entities.TestVariables.ONE_SECOND;
 
 @Getter
+@Log4j2
 public class HomePage extends BaseDriver {
 
     @FindBy(xpath = "//*[@id=\"user-name\"]")
@@ -27,11 +29,13 @@ public class HomePage extends BaseDriver {
     }
 
     public void enterUsername(final String string) {
+        log.debug("Entering username: {}", string);
         waitUntilClickable(username, ONE_SECOND);
         username.sendKeys(string);
     }
 
     public void enterPassword(final String string) {
+        log.debug("Entering password");
         waitUntilClickable(username, ONE_SECOND);
         password.sendKeys(string);
     }
