@@ -13,6 +13,7 @@ public abstract class LoggedUserBaseTest extends BaseTest {
     @BeforeMethod
     public void before() {
         try {
+            log.debug("Before method setup");
             driver = getChromeDriver();
             Home home = new Home(driver);
             home.successfulLogin(TestVariables.TESTED_USER_NAME, TestVariables.VALID_PASSWORD);
