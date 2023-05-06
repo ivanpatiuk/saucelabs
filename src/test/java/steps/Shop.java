@@ -26,7 +26,7 @@ public class Shop extends ShopPage {
         super(driver);
     }
 
-    private void assertOrdering(final String orderingName, final List<String> items) {
+    private void assertSorting(final String orderingName, final List<String> items) {
         if (orderingName.contains("Name")) {
             Assert.assertTrue(Ordering.natural().isOrdered(items));
         } else {
@@ -44,31 +44,25 @@ public class Shop extends ShopPage {
                 .collect(Collectors.toList());
     }
 
-    public void verifyOrdering(final List<OrderingTestData> orderingTestDataList) {
+    private void verifyCartBadge() {
+        String counter = getCartBadgeCounter().getText();
+        Assert.assertEquals(counter, "1");
+    }
+
+    private void verifyRemoveButton(final String string) {
+        String buttonText = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), ONE_SECOND).getText();
+        Assert.assertEquals("Remove", buttonText);
+    }
+
+    public void verifySorting(final List<OrderingTestData> orderingTestDataList) {
         orderingTestDataList.forEach(orderingTestData -> {
             this.selectOrdering(orderingTestData.getOrderingName());
             List<String> items = getElementsText(this, orderingTestData.getBy());
             if (orderingTestData.isReversed()) {
                 Collections.reverse(items);
             }
-            assertOrdering(orderingTestData.getOrderingName(), items);
+            assertSorting(orderingTestData.getOrderingName(), items);
         });
-    }
-
-    public void orderItem(final String string) {
-        addToCart(string);
-        clickOnCart();
-    }
-
-    public void logout() {
-        clickOnSideBar();
-        clickOnLogout();
-        verifyUrl(HOME_PAGE_URL);
-    }
-
-    public void verifyDescription() {
-        final List<String> itemsDescription = getElementsText(this, getInventoryItemsDescription());
-        itemsDescription.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description)));
     }
 
     public void verifyItemsOpening() {
@@ -76,11 +70,7 @@ public class Shop extends ShopPage {
         itemTitles.forEach(itemTitle -> {
             // CREATE ITEM BEFORE CLICKING
             final WebElement itemFromShopPage = findElementBy(By.xpath("//div[@class='inventory_item_label']//div[contains(text(), '" + itemTitle + "')]/ancestor::div[@class='inventory_item']"), ONE_SECOND);
-            final ItemDTO itemBeforeClicking = ItemDTO.getItemDTO(
-                    itemFromShopPage,
-                    By.xpath("//div[@class='inventory_item_label']//div[@class='inventory_item_name']"),
-                    By.xpath("//div[@class='inventory_item_label']//div[@class='inventory_item_desc']"),
-                    By.xpath("//div[@class='pricebar']//div[@class='inventory_item_price']"));
+            final ItemDTO itemBeforeClicking = ItemDTO.getItemDTO(itemFromShopPage);
             final WebElement titleButton = findElementBy(By.xpath("//div[@class='inventory_item_label']/a[contains(@id,'link')]"), ONE_SECOND);
 
             waitUntilClickable(titleButton, ONE_SECOND);
@@ -99,5 +89,31 @@ public class Shop extends ShopPage {
             itemPage.clickOnBackToProductsButton();
             Assert.assertEquals(itemAfterClicking, itemBeforeClicking);
         });
+    }
+
+    public void verifyDescription() {
+        final List<String> itemsDescription = getElementsText(this, getInventoryItemsDescription());
+        itemsDescription.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description)));
+    }
+
+    public void verifyOneItemOrdering() {
+        WebElement firstInventoryItem = getItems().get(0);
+        ItemDTO shopPageItem = ItemDTO.getItemDTO(firstInventoryItem);
+
+        addToCart(shopPageItem.getName());
+        verifyCartBadge();
+        verifyRemoveButton(shopPageItem.getName());
+        clickOnCart();
+
+        Cart cart = new Cart(driver);
+        cart.verifyCartPageWithItems(List.of(shopPageItem));
+
+
+    }
+
+    public void logout() {
+        clickOnSideBar();
+        clickOnLogout();
+        verifyUrl(HOME_PAGE_URL);
     }
 }

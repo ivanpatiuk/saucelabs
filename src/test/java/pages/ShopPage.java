@@ -20,15 +20,24 @@ public class ShopPage extends BaseDriver {
 
     @FindBy(xpath = "//div[@id='shopping_cart_container']/a")
     private WebElement shoppingCartButton;
+    public static final String BY_ITEM = "//div[@class='inventory_item_name' and text()='<item_title>']/ancestor::div[@class='inventory_item']//button[contains(@class, 'btn_inventory')]";
     @FindBy(xpath = "//button[@id='react-burger-menu-btn']")
     private WebElement sidebar;
     @FindBy(xpath = "//a[@id='logout_sidebar_link']")
     private WebElement logout;
     @FindBy(xpath = "//div[@class='inventory_list']//div[@class='inventory_item']")
     private List<WebElement> items;
+    @FindBy(xpath = "//*[@class='shopping_cart_container']//span[@class='shopping_cart_badge']")
+    private WebElement cartBadgeCounter;
 
     private final By inventoryItemsDescription = By.xpath("//div[@class='inventory_list']//div[@class='inventory_item_desc']");
     private final By selectOrderingButton = By.xpath("//*[@id=\"header_container\"]//select");
+
+    private void clickOnAddOrRemove(final String string) {
+        WebElement button = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), ONE_SECOND);
+        waitUntilClickable(button, ONE_SECOND);
+        button.click();
+    }
 
     public ShopPage(WebDriver driver) {
         super(driver);
@@ -41,20 +50,25 @@ public class ShopPage extends BaseDriver {
         select.selectByVisibleText(string);
     }
 
+
     public void addToCart(final String string) {
         log.debug("Adding to cart: {}", string);
-        WebElement addToCartButton = findElementBy(By.xpath("//div[@class='inventory_item_name' and text()='" + string + "']/ancestor::div[@class='inventory_item']//button[contains(@class, 'btn_inventory')]"), ONE_SECOND);
-        waitUntilClickable(addToCartButton, ONE_SECOND);
-        addToCartButton.click();
+        clickOnAddOrRemove(string);
     }
 
-    public void clickOnCart(){
+    public void removeItem(final String string) {
+        log.debug("Removing from cart: {}", string);
+        clickOnAddOrRemove(string);
+    }
+
+    public void clickOnCart() {
         log.debug("Clicking on cart");
         waitUntilClickable(shoppingCartButton, ONE_SECOND);
         shoppingCartButton.click();
+        verifyUrl("https://www.saucedemo.com/cart.html");
     }
 
-    public void clickOnSideBar(){
+    public void clickOnSideBar() {
         log.debug("Clicking on side bar");
         waitUntilClickable(sidebar, ONE_SECOND);
         sidebar.click();

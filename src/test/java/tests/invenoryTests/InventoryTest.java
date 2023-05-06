@@ -21,7 +21,7 @@ public class InventoryTest extends LoggedUserBaseTest {
     @Test(dependsOnGroups = "login")
     void orderingTestShouldSuccess() {
         Shop shop = new Shop(driver);
-        shop.verifyOrdering(getOrderingTestDataList());
+        shop.verifySorting(getOrderingTestDataList());
     }
 
     @Test(dependsOnGroups = "login")

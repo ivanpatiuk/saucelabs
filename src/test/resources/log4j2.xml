@@ -4,10 +4,13 @@
         <!-- Console appender configuration -->
         <Console name="console" target="SYSTEM_OUT" follow="true">
             <PatternLayout disableAnsi="false"
-                           pattern="%d{HH:mm:ss} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} [%M] %style{%C:%L}{cyan} - %msg%n"/>
+                           pattern="%d{HH:mm:ss.SSS} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %highlight{%C{1.}.%M:%L}{cyan} - %msg%n"/>
         </Console>
     </Appenders>
     <Loggers>
+        <Logger name="com.saucelabs" level="debug">
+            <AppenderRef ref="console"/>
+        </Logger>
         <!-- Root logger referring to console appender -->
         <Root level="warn" additivity="false">
             <AppenderRef ref="console"/>
