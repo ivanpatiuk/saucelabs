@@ -9,7 +9,7 @@
     </Appenders>
     <Loggers>
         <!-- Root logger referring to console appender -->
-        <Root level="warb" additivity="false">
+        <Root level="warn" additivity="false">
             <AppenderRef ref="console"/>
         </Root>
     </Loggers>
