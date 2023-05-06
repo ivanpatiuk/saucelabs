@@ -3,6 +3,7 @@ package com.saucelabs.pages;
 import com.saucelabs.entities.TestVariables;
 import com.saucelabs.support.Action;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +14,7 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.List;
 
+@NoArgsConstructor
 @AllArgsConstructor
 public abstract class BaseDriver {
     protected WebDriver driver;
@@ -71,6 +73,12 @@ public abstract class BaseDriver {
         String actual = findElementBy(by, TestVariables.ONE_SECOND).getText();
         Assert.assertTrue(actual.contains(expected));
     }
+
+    public void verifyLogoAndUrl(final String url) {
+        verifyUrl(url);
+        verifyTextContains(By.xpath("//div[@id=\"header_container\"]//div[@class=\"app_logo\"]"), "Swag Labs");
+    }
+
 
     public void verifyTime(final Action action, final long expected) {
         long before = System.currentTimeMillis();

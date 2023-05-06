@@ -40,8 +40,7 @@ public class Home extends HomePage {
         log.debug("Called successful login");
         login(username, password);
         waitUntilInvisible(By.xpath("//div[@class=\"login_container\"]"), TestVariables.ONE_SECOND);
-        verifyUrl(TestVariables.SHOP_PAGE_URL);
-        verifyTextContains(By.xpath("//div[@id=\"header_container\"]//div[@class=\"app_logo\"]"), "Swag Labs");
+        verifyLogoAndUrl(TestVariables.SHOP_PAGE_URL);
         verifyTextContains(By.xpath("//footer//div[@class=\"footer_copy\"]"), "© 2023 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy");
         verifyTextContains(By.xpath("//div[@class=\"header_secondary_container\"]//span[@class=\"title\"]"), "Products");
     }

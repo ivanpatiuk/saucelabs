@@ -2,6 +2,7 @@ package com.saucelabs.steps;
 
 import com.google.common.collect.Ordering;
 import com.saucelabs.entities.OrderingTestData;
+import com.saucelabs.entities.TestVariables;
 import com.saucelabs.models.ItemDTO;
 import com.saucelabs.pages.ItemPage;
 import com.saucelabs.pages.ShopPage;
@@ -116,9 +117,9 @@ public class Shop extends ShopPage {
         clickOnCart();
 
         final Cart cart = new Cart(driver);
+        verifyLogoAndUrl(TestVariables.CART_PAGE_URL);
         cart.verifyCartPageWithItems(List.of(shopPageItem));
-
-
+        cart.clickOnCheckoutButton();
     }
 
     public void logout() {

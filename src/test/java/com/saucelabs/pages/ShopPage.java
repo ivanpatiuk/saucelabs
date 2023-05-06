@@ -1,7 +1,6 @@
 package com.saucelabs.pages;
 
 import com.saucelabs.entities.TestVariables;
-import com.saucelabs.utils.BaseDriver;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -17,9 +16,10 @@ import java.util.List;
 @Log4j2
 public class ShopPage extends BaseDriver {
 
+    public static final String BY_ITEM = "//div[@class='inventory_item_name' and text()='<item_title>']/ancestor::div[@class='inventory_item']//button[contains(@class, 'btn_inventory')]";
+
     @FindBy(xpath = "//div[@id='shopping_cart_container']/a")
     private WebElement shoppingCartButton;
-    public static final String BY_ITEM = "//div[@class='inventory_item_name' and text()='<item_title>']/ancestor::div[@class='inventory_item']//button[contains(@class, 'btn_inventory')]";
     @FindBy(xpath = "//button[@id='react-burger-menu-btn']")
     private WebElement sidebar;
     @FindBy(xpath = "//a[@id='logout_sidebar_link']")
