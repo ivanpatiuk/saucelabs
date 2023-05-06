@@ -25,7 +25,7 @@ public class CartPage extends BaseDriver {
     private WebElement removeButton;
     @FindBy(xpath = "//button[@id='continue-shopping']")
     private WebElement continueShippingButton;
-    @FindBy(xpath = "//div[@class='cartItem']")
+    @FindBy(xpath = "//div[@class='cart_item']")
     private List<WebElement> cartItems;
 
     public CartPage(WebDriver driver) {
@@ -54,6 +54,7 @@ public class CartPage extends BaseDriver {
     }
 
     public WebElement getCartItemByName(final String name) {
+        log.debug("Getting cart item by name: {}", name);
         return cartItems.stream().filter(cartItem -> cartItem
                         .findElement(By.xpath("//div[@class='inventory_item_name']"))
                         .getText()
