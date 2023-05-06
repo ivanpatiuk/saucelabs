@@ -4,6 +4,7 @@ import com.google.common.collect.Ordering;
 import com.saucelabs.entities.OrderingTestData;
 import com.saucelabs.entities.TestVariables;
 import com.saucelabs.models.ItemDTO;
+import com.saucelabs.pages.CheckoutPage;
 import com.saucelabs.pages.ItemPage;
 import com.saucelabs.pages.ShopPage;
 import io.netty.util.internal.StringUtil;
@@ -18,8 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.saucelabs.entities.TestVariables.HOME_PAGE_URL;
-import static com.saucelabs.entities.TestVariables.ONE_SECOND;
+import static com.saucelabs.entities.TestVariables.*;
 
 @Getter
 @Log4j2
@@ -120,6 +120,14 @@ public class Shop extends ShopPage {
         verifyLogoAndUrl(TestVariables.CART_PAGE_URL);
         cart.verifyCartPageWithItems(List.of(shopPageItem));
         cart.clickOnCheckoutButton();
+
+        final CheckoutPage checkoutPage = new CheckoutPage(driver);
+        checkoutPage.verifyLogoAndUrl(CHECKOUT_STEP_ONE_PAGE_URL);
+        checkoutPage.enterFirstName("Firstname");
+        checkoutPage.enterLastName("Lastname");
+        checkoutPage.enterPostalCode("81000");
+
+        // TODO
     }
 
     public void logout() {
