@@ -8,7 +8,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.saucelabs" level="debug">
+        <Logger name="com.saucelabs" level="warn">
             <AppenderRef ref="console"/>
         </Logger>
         <!-- Root logger referring to console appender -->
