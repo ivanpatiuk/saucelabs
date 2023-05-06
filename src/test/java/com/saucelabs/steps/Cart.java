@@ -40,12 +40,12 @@ public class Cart extends CartPage {
     }
 
     public void verifyCartPageWithItems(final List<ItemDTO> itemDTOS) {
-        log.debug("Verifying cart page item with items count: {}", itemDTOS.size());
+        log.debug("Verifying cart page item with items count: {}.", itemDTOS.size());
         Assert.assertEquals(getCartBadgeCounter().getText(), String.valueOf(itemDTOS.size()));
         verifyUIElements();
         itemDTOS.forEach(itemDTO -> {
-            log.debug("Verifying cart page item: {}", itemDTO.getName());
-            WebElement item = getCartItemByName(itemDTO.getName());
+            log.debug("Verifying cart page item: {}.", itemDTO.getName());
+            final WebElement item = getCartItemByName(itemDTO.getName());
             verifyItemQTY(item);
             verifyItemDescription(item);
         });

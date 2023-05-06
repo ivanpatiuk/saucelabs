@@ -7,6 +7,7 @@ import com.saucelabs.pages.ItemPage;
 import com.saucelabs.pages.ShopPage;
 import io.netty.util.internal.StringUtil;
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,7 @@ import static com.saucelabs.entities.TestVariables.HOME_PAGE_URL;
 import static com.saucelabs.entities.TestVariables.ONE_SECOND;
 
 @Getter
+@Log4j2
 public class Shop extends ShopPage {
 
     public Shop(WebDriver driver) {
@@ -27,6 +29,7 @@ public class Shop extends ShopPage {
     }
 
     private void assertSorting(final String orderingName, final List<String> items) {
+        log.debug("Asserting sorting for ordering: '{}'.", orderingName);
         if (orderingName.contains("Name")) {
             Assert.assertTrue(Ordering.natural().isOrdered(items));
         } else {
@@ -37,6 +40,7 @@ public class Shop extends ShopPage {
     }
 
     private List<String> getElementsText(final Shop shop, final By by) {
+        log.debug("Getting elements text.");
         return shop
                 .findElementsBy(by, ONE_SECOND)
                 .stream()
@@ -45,16 +49,19 @@ public class Shop extends ShopPage {
     }
 
     private void verifyCartBadge() {
+        log.debug("Verifying cart badge.");
         final String counter = getCartBadgeCounter().getText();
         Assert.assertEquals(counter, "1");
     }
 
-    private void verifyRemoveButton(final String string) {
-        final String buttonText = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), ONE_SECOND).getText();
+    private void verifyRemoveButton(final String itemName) {
+        log.debug("Verifying remove button for item: '{}'", itemName);
+        final String buttonText = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", itemName)), ONE_SECOND).getText();
         Assert.assertEquals("Remove", buttonText);
     }
 
     public void verifySorting(final List<OrderingTestData> orderingTestDataList) {
+        log.debug("Verifying sorting.");
         orderingTestDataList.forEach(orderingTestData -> {
             selectOrdering(orderingTestData.getOrderingName());
             final List<String> items = getElementsText(this, orderingTestData.getBy());
@@ -66,6 +73,7 @@ public class Shop extends ShopPage {
     }
 
     public void verifyItemsOpening() {
+        log.debug("Verifying items opening.");
         final List<String> itemTitles = findElementsBy(By.xpath("//div[@class='inventory_list']//div[@class='inventory_item_name']"), ONE_SECOND).stream().map(WebElement::getText).toList();
         itemTitles.forEach(itemTitle -> {
             // CREATE ITEM BEFORE CLICKING
@@ -92,11 +100,13 @@ public class Shop extends ShopPage {
     }
 
     public void verifyDescription() {
+        log.debug("Verifying description.");
         final List<String> itemsDescription = getElementsText(this, getInventoryItemsDescription());
         itemsDescription.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description)));
     }
 
     public void verifyOneItemOrdering() {
+        log.debug("Verifying one item ordering.");
         final WebElement firstInventoryItem = getItems().get(0);
         final ItemDTO shopPageItem = ItemDTO.getItemDTO(firstInventoryItem);
 
@@ -112,6 +122,7 @@ public class Shop extends ShopPage {
     }
 
     public void logout() {
+        log.debug("Logout");
         clickOnSideBar();
         clickOnLogout();
         verifyUrl(HOME_PAGE_URL);

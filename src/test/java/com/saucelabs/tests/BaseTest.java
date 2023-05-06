@@ -12,6 +12,7 @@ public abstract class BaseTest extends BaseDriver {
 
     @BeforeSuite
     public void setup() {
+
         WebManager.setupChromeDriver();
     }
 
