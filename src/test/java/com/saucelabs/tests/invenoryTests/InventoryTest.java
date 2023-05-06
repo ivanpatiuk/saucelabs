@@ -20,19 +20,19 @@ public class InventoryTest extends LoggedUserBaseTest {
 
     @Test(dependsOnGroups = "login")
     void orderingTestShouldSuccess() {
-        Shop shop = new Shop(driver);
+        final Shop shop = new Shop(driver);
         shop.verifySorting(getOrderingTestDataList());
     }
 
     @Test(dependsOnGroups = "login")
     void descriptionTestShouldSuccess() {
-        Shop shop = new Shop(driver);
+        final Shop shop = new Shop(driver);
         shop.verifyDescription();
     }
 
     @Test
     void openingItemTestShouldSuccess() {
-        Shop shop = new Shop(driver);
+        final Shop shop = new Shop(driver);
         shop.verifyItemsOpening();
     }
 }

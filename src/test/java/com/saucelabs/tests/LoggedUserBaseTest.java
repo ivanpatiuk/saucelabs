@@ -14,9 +14,10 @@ public abstract class LoggedUserBaseTest extends BaseTest {
         try {
             log.debug("Before method setup");
             driver = WebManager.getChromeDriver();
-            Home home = new Home(driver);
+            final Home home = new Home(driver);
             home.successfulLogin(TestVariables.TESTED_USER_NAME, TestVariables.VALID_PASSWORD);
         } catch (Exception e){
+            log.error("Running test was interrupted.");
             driver.quit();
             throw e;
         }

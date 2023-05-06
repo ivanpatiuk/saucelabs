@@ -10,28 +10,28 @@ public class LoginTest extends BaseTest {
 
     @Test(groups = "login")
     void loginStandardUserTestShouldSuccess() {
-        Home home = new Home(driver);
+        final Home home = new Home(driver);
         home.successfulLogin(TestVariables.STANDARD_USERNAME, TestVariables.VALID_PASSWORD);
     }
 
     @Test(groups = "login")
     void logoutStandardUserTestShouldSuccess() {
-        Home home = new Home(driver);
+        final Home home = new Home(driver);
         home.successfulLogin(TestVariables.STANDARD_USERNAME, TestVariables.VALID_PASSWORD);
 
-        Shop shop = new Shop(driver);
+        final Shop shop = new Shop(driver);
         shop.logout();
     }
 
     @Test(groups = "login")
     void loginStandardUserTestShouldFail() {
-        Home home = new Home(driver);
+        final Home home = new Home(driver);
         home.unsuccessfulLogin(TestVariables.STANDARD_USERNAME, TestVariables.NOT_VALID_PASSWORD);
     }
 
     @Test(groups = "login")
     void loginLockedOutUserTestShouldReturnError() {
-        Home home = new Home(driver);
+        final Home home = new Home(driver);
         home.unsuccessfulLogin(TestVariables.LOCKED_OUT_USERNAME, TestVariables.VALID_PASSWORD);
     }
 

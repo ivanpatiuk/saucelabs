@@ -45,19 +45,19 @@ public class Shop extends ShopPage {
     }
 
     private void verifyCartBadge() {
-        String counter = getCartBadgeCounter().getText();
+        final String counter = getCartBadgeCounter().getText();
         Assert.assertEquals(counter, "1");
     }
 
     private void verifyRemoveButton(final String string) {
-        String buttonText = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), ONE_SECOND).getText();
+        final String buttonText = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), ONE_SECOND).getText();
         Assert.assertEquals("Remove", buttonText);
     }
 
     public void verifySorting(final List<OrderingTestData> orderingTestDataList) {
         orderingTestDataList.forEach(orderingTestData -> {
-            this.selectOrdering(orderingTestData.getOrderingName());
-            List<String> items = getElementsText(this, orderingTestData.getBy());
+            selectOrdering(orderingTestData.getOrderingName());
+            final List<String> items = getElementsText(this, orderingTestData.getBy());
             if (orderingTestData.isReversed()) {
                 Collections.reverse(items);
             }
@@ -78,7 +78,7 @@ public class Shop extends ShopPage {
 
             // CREATE ITEM AFTER CLICKING
             final ItemPage itemPage = new ItemPage(driver);
-            WebElement itemFromItemPage = itemPage.getItem();
+            final WebElement itemFromItemPage = itemPage.getItem();
             final ItemDTO itemAfterClicking = ItemDTO.getItemDTO(
                     itemFromItemPage,
                     By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_name')]"),
@@ -97,15 +97,15 @@ public class Shop extends ShopPage {
     }
 
     public void verifyOneItemOrdering() {
-        WebElement firstInventoryItem = getItems().get(0);
-        ItemDTO shopPageItem = ItemDTO.getItemDTO(firstInventoryItem);
+        final WebElement firstInventoryItem = getItems().get(0);
+        final ItemDTO shopPageItem = ItemDTO.getItemDTO(firstInventoryItem);
 
         addToCart(shopPageItem.getName());
         verifyCartBadge();
         verifyRemoveButton(shopPageItem.getName());
         clickOnCart();
 
-        Cart cart = new Cart(driver);
+        final Cart cart = new Cart(driver);
         cart.verifyCartPageWithItems(List.of(shopPageItem));
 
 

@@ -66,26 +66,26 @@ public class BaseDriver {
     }
 
     public void verifyUrl(final String expected) {
-        String actual = driver.getCurrentUrl();
+        final String actual = driver.getCurrentUrl();
         Assert.assertEquals(actual, expected);
     }
 
     public void verifyTextContains(final By by, final String expected) {
-        String actual = findElementBy(by, ONE_SECOND).getText();
+        final String actual = findElementBy(by, ONE_SECOND).getText();
         Assert.assertTrue(actual.contains(expected));
     }
 
     public void verifyTime(final Action action, final long expected) {
-        long before = System.currentTimeMillis();
+        final long before = System.currentTimeMillis();
         action.execute();
-        long actual = System.currentTimeMillis() - before;
+        final long actual = System.currentTimeMillis() - before;
         Assert.assertTrue(actual < expected, "Expected time: " + expected + " <, but was: " + actual);
     }
 
     public void verifyTime(final List<Action> actions, final long expected) {
-        long before = System.currentTimeMillis();
+        final long before = System.currentTimeMillis();
         actions.forEach(Action::execute);
-        long actual = System.currentTimeMillis() - before;
+        final long actual = System.currentTimeMillis() - before;
         Assert.assertTrue(actual < expected, "Expected time: " + expected + " <, but was: " + actual);
     }
 }

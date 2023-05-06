@@ -33,7 +33,7 @@ public class ShopPage extends BaseDriver {
     private final By selectOrderingButton = By.xpath("//*[@id=\"header_container\"]//select");
 
     private void clickOnAddOrRemove(final String string) {
-        WebElement button = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), TestVariables.ONE_SECOND);
+        final WebElement button = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), TestVariables.ONE_SECOND);
         waitUntilClickable(button, TestVariables.ONE_SECOND);
         button.click();
     }
@@ -45,7 +45,7 @@ public class ShopPage extends BaseDriver {
 
     public void selectOrdering(final String string) {
         log.debug("Selecting ordering: {}", string);
-        Select select = new Select(findElementBy(selectOrderingButton, TestVariables.ONE_SECOND));
+        final Select select = new Select(findElementBy(selectOrderingButton, TestVariables.ONE_SECOND));
         select.selectByVisibleText(string);
     }
 

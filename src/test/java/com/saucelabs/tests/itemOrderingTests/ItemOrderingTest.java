@@ -8,7 +8,7 @@ public class ItemOrderingTest extends LoggedUserBaseTest {
 
     @Test
     void orderItemTestShouldSuccess() {
-        Shop shop = new Shop(driver);
+        final Shop shop = new Shop(driver);
         shop.verifyOneItemOrdering();
     }
 }

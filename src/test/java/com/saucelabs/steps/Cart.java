@@ -21,13 +21,13 @@ public class Cart extends CartPage {
 
     private void verifyItemQTY(final WebElement item) {
         log.debug("Verifying item QTY.");
-        String QTY = item.findElement(By.xpath("//div[@class='cart_quantity']")).getText();
+        final String QTY = item.findElement(By.xpath("//div[@class='cart_quantity']")).getText();
         Assert.assertEquals(QTY, "1");
     }
 
     private void verifyItemDescription(final WebElement item) {
         log.debug("Verifying item description.");
-        ItemDTO cartPageItemDTO = ItemDTO.getItemDTO(item);
+        final ItemDTO cartPageItemDTO = ItemDTO.getItemDTO(item);
         Assert.assertEquals(cartPageItemDTO, cartPageItemDTO);
     }
 

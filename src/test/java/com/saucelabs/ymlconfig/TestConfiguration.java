@@ -12,7 +12,7 @@ public class TestConfiguration {
 
     static {
         try {
-            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+            final ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             mapper.findAndRegisterModules();
             properties = mapper.readValue(new File(CONFIGURATION_FILE_PATH), PropertyModel.class);
             if(System.getProperty("tested-user-name") != null){
