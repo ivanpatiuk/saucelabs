@@ -18,6 +18,12 @@ public class InventoryTest extends LoggedUserBaseTest {
                 new OrderingTestData("Price (high to low)", true, By.xpath("//div[@class=\"inventory_list\"]//div[@class=\"inventory_item_price\"]")));
     }
 
+    @Test
+    void removeOneItemTestShouldSuccess() {
+        final Shop shop = new Shop(driver);
+        shop.verifyOneItemRemoving();
+    }
+
     @Test(dependsOnGroups = "login")
     void orderingTestShouldSuccess() {
         final Shop shop = new Shop(driver);

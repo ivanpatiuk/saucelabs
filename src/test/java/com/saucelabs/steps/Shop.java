@@ -11,6 +11,7 @@ import io.netty.util.internal.StringUtil;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -49,16 +50,25 @@ public class Shop extends ShopPage {
                 .collect(Collectors.toList());
     }
 
-    private void verifyCartBadge() {
+    private void verifyCartBadge(final String expected) {
         log.debug("Verifying cart badge.");
-        final String counter = getCartBadgeCounter().getText();
-        Assert.assertEquals(counter, "1");
+        final String actual = getCartBadgeCounter().getText();
+        Assert.assertEquals(actual, expected);
     }
 
     private void verifyRemoveButton(final String itemName) {
         log.debug("Verifying remove button for item: '{}'", itemName);
         final String buttonText = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", itemName)), ONE_SECOND).getText();
         Assert.assertEquals("Remove", buttonText);
+    }
+
+    public void verifyOneItemRemoving() {
+        log.debug("Verifying one item removing.");
+        final ItemDTO itemDTO = ItemDTO.getItemDTO(getItems().get(0));
+        addToCart(itemDTO.getName());
+        verifyCartBadge("1");
+        removeItem(itemDTO.getName());
+        Assert.assertThrows(NoSuchElementException.class, () -> verifyCartBadge("1"));
     }
 
     public void verifySorting(final List<OrderingTestData> orderingTestDataList) {
@@ -112,7 +122,7 @@ public class Shop extends ShopPage {
         final ItemDTO shopPageItem = ItemDTO.getItemDTO(firstInventoryItem);
 
         addToCart(shopPageItem.getName());
-        verifyCartBadge();
+        verifyCartBadge("1");
         verifyRemoveButton(shopPageItem.getName());
         clickOnCart();
 
