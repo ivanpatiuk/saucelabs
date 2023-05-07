@@ -17,12 +17,12 @@ public class Home extends HomePage {
 
     public void login(final String username, final String password) {
         try {
-            log.debug("Called login username: {}", username);
+            log.debug("Logging in for user: '{}'", username);
             enterUsername(username);
             enterPassword(password);
             clickOnLoginButton();
         } catch (Exception e) {
-            System.out.printf("login as %s failed", username);
+            log.fatal("Logging in for user: '{}' failed.", username);
             throw e;
         }
     }
@@ -39,9 +39,9 @@ public class Home extends HomePage {
     public void successfulLogin(final String username, final String password) {
         log.debug("Called successful login");
         login(username, password);
-        waitUntilInvisible(By.xpath("//div[@class=\"login_container\"]"), TestVariables.ONE_SECOND);
+        waitUntilInvisible(By.xpath("//div[@class='login_container']"), TestVariables.ONE_SECOND);
         verifyLogoAndUrl(TestVariables.SHOP_PAGE_URL);
-        verifyTextContains(By.xpath("//footer//div[@class=\"footer_copy\"]"), "© 2023 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy");
-        verifyTextContains(By.xpath("//div[@class=\"header_secondary_container\"]//span[@class=\"title\"]"), "Products");
+        verifyTextContains(By.xpath("//footer//div[@class='footer_copy']"), "© 2023 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy");
+        verifyTextContains(By.xpath("//span[@class='title']"), "Products");
     }
 }
