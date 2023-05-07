@@ -16,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,7 +53,7 @@ public class Shop extends ShopPage {
 
     private void verifyCartBadge(final String expected) {
         log.debug("Verifying cart badge.");
-        final String actual = getCartBadgeCounter().getText();
+        final String actual = getCartBadgeCounter();
         Assert.assertEquals(actual, expected);
     }
 
@@ -62,13 +63,35 @@ public class Shop extends ShopPage {
         Assert.assertEquals("Remove", buttonText);
     }
 
-    public void verifyOneItemRemoving() {
-        log.debug("Verifying one item removing.");
-        final ItemDTO itemDTO = ItemDTO.getItemDTO(getItems().get(0));
+    private void verifyItemAdding(final int expectedCounter, final WebElement webElementItem, final List<ItemDTO> itemDTOS) {
+        final ItemDTO itemDTO = ItemDTO.getItemDTO(webElementItem);
+        log.debug("Verifying adding the item: '{}'.", itemDTO.getName());
+        itemDTOS.add(itemDTO);
         addToCart(itemDTO.getName());
-        verifyCartBadge("1");
+        verifyCartBadge(String.valueOf(expectedCounter));
+    }
+
+    private void verifyItemRemoving(final int expectedCounter, final ItemDTO itemDTO) {
+        log.debug("Verifying removing the item: '{}'.", itemDTO.getName());
         removeItem(itemDTO.getName());
-        Assert.assertThrows(NoSuchElementException.class, () -> verifyCartBadge("1"));
+        if (expectedCounter != 0) {
+            verifyCartBadge(String.valueOf(expectedCounter));
+        }
+    }
+
+    public void verifyItemsRemoving() {
+        log.debug("Verifying items removing.");
+        int expectedCounter = 0;
+        final List<ItemDTO> itemDTOS = new ArrayList<>();
+
+        for (WebElement webElementItem : getInventoryItems()) {
+            verifyItemAdding(++expectedCounter, webElementItem, itemDTOS);
+        }
+        for (ItemDTO itemDTO : itemDTOS) {
+            verifyItemRemoving(--expectedCounter, itemDTO);
+        }
+
+        Assert.assertThrows(NoSuchElementException.class, () -> verifyCartBadge("6"));
     }
 
     public void verifySorting(final List<OrderingTestData> orderingTestDataList) {
@@ -112,13 +135,13 @@ public class Shop extends ShopPage {
 
     public void verifyDescription() {
         log.debug("Verifying description.");
-        final List<String> itemsDescription = getElementsText(this, getInventoryItemsDescription());
-        itemsDescription.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description)));
+        final List<ItemDTO> itemDTOS = getInventoryItems().stream().map(ItemDTO::getItemDTO).toList();
+        itemDTOS.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description.getDescription())));
     }
 
     public void verifyOneItemOrdering() {
         log.debug("Verifying one item ordering.");
-        final WebElement firstInventoryItem = getItems().get(0);
+        final WebElement firstInventoryItem = getInventoryItems().get(0);
         final ItemDTO shopPageItem = ItemDTO.getItemDTO(firstInventoryItem);
 
         addToCart(shopPageItem.getName());

@@ -24,8 +24,8 @@ public class ItemDTO {
     public static ItemDTO getItemDTO(final WebElement webElement) {
         return ItemDTO.getItemDTO(
                 webElement,
-                By.xpath("//div[@class='inventory_item_name']"),
-                By.xpath("//div[@class='inventory_item_desc']"),
-                By.xpath("//div[@class='inventory_item_price']"));
+                By.xpath(".//div[@class='inventory_item_name']"),
+                By.xpath(".//div[@class='inventory_item_desc']"),
+                By.xpath(".//div[@class='inventory_item_price']"));
     }
 }

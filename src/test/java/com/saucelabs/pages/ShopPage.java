@@ -1,6 +1,5 @@
 package com.saucelabs.pages;
 
-import com.saucelabs.entities.TestVariables;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -11,6 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+
+import static com.saucelabs.entities.TestVariables.ONE_SECOND;
 
 @Getter
 @Log4j2
@@ -24,28 +25,31 @@ public class ShopPage extends BaseDriver {
     private WebElement sidebar;
     @FindBy(xpath = "//a[@id='logout_sidebar_link']")
     private WebElement logout;
-    @FindBy(xpath = "//div[@class='inventory_list']//div[@class='inventory_item']")
-    private List<WebElement> items;
-    @FindBy(xpath = "//*[@class='shopping_cart_container']//span[@class='shopping_cart_badge']")
+    @FindBy(xpath = "//span[@class='shopping_cart_badge']")
     private WebElement cartBadgeCounter;
+    @FindBy(xpath = "//div[@class='inventory_item']")
+    private List<WebElement> inventoryItems;
 
-    private final By inventoryItemsDescription = By.xpath("//div[@class='inventory_list']//div[@class='inventory_item_desc']");
     private final By selectOrderingButton = By.xpath("//*[@id=\"header_container\"]//select");
-
-    private void clickOnAddOrRemove(final String string) {
-        final WebElement button = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), TestVariables.ONE_SECOND);
-        waitUntilClickable(button, TestVariables.ONE_SECOND);
-        button.click();
-    }
 
     public ShopPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
+    private void clickOnAddOrRemove(final String string) {
+        final WebElement button = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), ONE_SECOND);
+        waitUntilClickable(button, ONE_SECOND);
+        button.click();
+    }
+
+    public String getCartBadgeCounter() {
+        return cartBadgeCounter.getText();
+    }
+
     public void selectOrdering(final String string) {
         log.debug("Selecting ordering: {}", string);
-        final Select select = new Select(findElementBy(selectOrderingButton, TestVariables.ONE_SECOND));
+        final Select select = new Select(findElementBy(selectOrderingButton, ONE_SECOND));
         select.selectByVisibleText(string);
     }
 
@@ -62,20 +66,20 @@ public class ShopPage extends BaseDriver {
 
     public void clickOnCart() {
         log.debug("Clicking on cart");
-        waitUntilClickable(shoppingCartButton, TestVariables.ONE_SECOND);
+        waitUntilClickable(shoppingCartButton, ONE_SECOND);
         shoppingCartButton.click();
         verifyUrl("https://www.saucedemo.com/cart.html");
     }
 
     public void clickOnSideBar() {
         log.debug("Clicking on side bar");
-        waitUntilClickable(sidebar, TestVariables.ONE_SECOND);
+        waitUntilClickable(sidebar, ONE_SECOND);
         sidebar.click();
     }
 
     public void clickOnLogout(){
         log.debug("Clicking on logout");
-        waitUntilClickable(logout, TestVariables.ONE_SECOND);
+        waitUntilClickable(logout, ONE_SECOND);
         logout.click();
     }
 }

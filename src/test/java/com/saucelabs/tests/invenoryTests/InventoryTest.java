@@ -19,9 +19,9 @@ public class InventoryTest extends LoggedUserBaseTest {
     }
 
     @Test
-    void removeOneItemTestShouldSuccess() {
+    void removingItemsTestShouldSuccess() {
         final Shop shop = new Shop(driver);
-        shop.verifyOneItemRemoving();
+        shop.verifyItemsRemoving();
     }
 
     @Test(dependsOnGroups = "login")
@@ -30,7 +30,7 @@ public class InventoryTest extends LoggedUserBaseTest {
         shop.verifySorting(getOrderingTestDataList());
     }
 
-    @Test(dependsOnGroups = "login")
+    @Test
     void descriptionTestShouldSuccess() {
         final Shop shop = new Shop(driver);
         shop.verifyDescription();
