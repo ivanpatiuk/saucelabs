@@ -2,9 +2,7 @@ package com.saucelabs.steps;
 
 import com.google.common.collect.Ordering;
 import com.saucelabs.entities.OrderingTestData;
-import com.saucelabs.entities.TestVariables;
 import com.saucelabs.models.ItemDTO;
-import com.saucelabs.pages.CheckoutPage;
 import com.saucelabs.pages.ItemPage;
 import com.saucelabs.pages.ShopPage;
 import io.netty.util.internal.StringUtil;
@@ -21,7 +19,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.saucelabs.entities.TestVariables.*;
+import static com.saucelabs.entities.TestVariables.HOME_PAGE_URL;
+import static com.saucelabs.entities.TestVariables.ONE_SECOND;
 
 @Getter
 @Log4j2
@@ -139,28 +138,17 @@ public class Shop extends ShopPage {
         itemDTOS.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description.getDescription())));
     }
 
-    public void verifyOneItemOrdering() {
+    public ItemDTO addToCartOneItem() {
         log.debug("Verifying one item ordering.");
         final WebElement firstInventoryItem = getInventoryItems().get(0);
-        final ItemDTO shopPageItem = ItemDTO.getItemDTO(firstInventoryItem);
+        final ItemDTO itemDTO = ItemDTO.getItemDTO(firstInventoryItem);
 
-        addToCart(shopPageItem.getName());
+        addToCart(itemDTO.getName());
         verifyCartBadge("1");
-        verifyRemoveButton(shopPageItem.getName());
+        verifyRemoveButton(itemDTO.getName());
         clickOnCart();
 
-        final Cart cart = new Cart(driver);
-        verifyLogoAndUrl(TestVariables.CART_PAGE_URL);
-        cart.verifyCartPageWithItems(List.of(shopPageItem));
-        cart.clickOnCheckoutButton();
-
-        final CheckoutPage checkoutPage = new CheckoutPage(driver);
-        checkoutPage.verifyLogoAndUrl(CHECKOUT_STEP_ONE_PAGE_URL);
-        checkoutPage.enterFirstName("Firstname");
-        checkoutPage.enterLastName("Lastname");
-        checkoutPage.enterPostalCode("81000");
-
-        // TODO
+        return itemDTO;
     }
 
     public void logout() {

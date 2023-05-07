@@ -1,5 +1,6 @@
 package com.saucelabs.steps;
 
+import com.saucelabs.entities.TestVariables;
 import com.saucelabs.models.ItemDTO;
 import com.saucelabs.pages.CartPage;
 import lombok.extern.log4j.Log4j2;
@@ -49,5 +50,11 @@ public class Cart extends CartPage {
             verifyItemQTY(item);
             verifyItemDescription(item);
         });
+    }
+
+    public void checkoutItem(final ItemDTO itemDTO) {
+        verifyLogoAndUrl(TestVariables.CART_PAGE_URL);
+        verifyCartPageWithItems(List.of(itemDTO));
+        clickOnCheckoutButton();
     }
 }
