@@ -18,7 +18,7 @@ public class InventoryTest extends LoggedUserBaseTest {
                 new OrderingTestData("Price (high to low)", true, By.xpath("//div[@class=\"inventory_list\"]//div[@class=\"inventory_item_price\"]")));
     }
 
-    @Test
+    @Test(dependsOnGroups = "login")
     void removingItemsTestShouldSuccess() {
         final Shop shop = new Shop(driver);
         shop.verifyItemsRemoving();
@@ -30,13 +30,13 @@ public class InventoryTest extends LoggedUserBaseTest {
         shop.verifySorting(getOrderingTestDataList());
     }
 
-    @Test
+    @Test(dependsOnGroups = "login")
     void descriptionTestShouldSuccess() {
         final Shop shop = new Shop(driver);
         shop.verifyDescription();
     }
 
-    @Test
+    @Test(dependsOnGroups = "login")
     void openingItemTestShouldSuccess() {
         final Shop shop = new Shop(driver);
         shop.verifyItemsOpening();
