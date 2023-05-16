@@ -16,5 +16,6 @@ public class CheckoutPageOneActions extends CheckoutPageOne {
         enterFirstName("Firstname");
         enterLastName("Lastname");
         enterPostalCode("81000");
+        clickOnContinueButton();
     }
 }

@@ -11,9 +11,9 @@ import static com.saucelabs.entities.TestVariables.ONE_SECOND;
 
 @Getter
 @Log4j2
-public abstract class CheckoutBasePage extends CartBasePage {
-    @FindBy(xpath = "//input[@id='cancel']")
-    private WebElement cancelButton;
+public abstract class CheckoutBasePage extends CartItemsBasePage {
+    @FindBy(xpath = "//button[@id='cancel']")
+    protected WebElement cancelButton;
 
     public CheckoutBasePage(WebDriver driver) {
         super(driver);

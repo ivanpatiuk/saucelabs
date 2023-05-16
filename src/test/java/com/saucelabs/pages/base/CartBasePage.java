@@ -11,7 +11,8 @@ import org.openqa.selenium.support.PageFactory;
 
 @Getter
 @Log4j2
-public class CartBasePage extends BaseDriver {
+public abstract class CartBasePage extends BaseDriver {
+
     @FindBy(xpath = "//div[@id='shopping_cart_container']/a")
     protected WebElement shoppingCartButton;
     @FindBy(xpath = "//*[@class='shopping_cart_container']//span[@class='shopping_cart_badge']")
