@@ -138,17 +138,20 @@ public class ShopPageActions extends ShopPage {
         itemDTOS.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description.getDescription())));
     }
 
-    public ItemDTO addToCartOneItem() {
-        log.debug("Verifying one item ordering.");
-        final WebElement firstInventoryItem = getInventoryItems().get(0);
-        final ItemDTO itemDTO = ItemDTO.getItemDTO(firstInventoryItem);
+    public List<ItemDTO> addItemsToCart(final List<Integer> itemIndicesList) {
+        log.debug("Verifying items ordering: {}", itemIndicesList);
+        final List<ItemDTO> itemDTOS = new ArrayList<>();
 
-        addToCart(itemDTO.getName());
-        verifyCartBadge("1");
-        verifyRemoveButton(itemDTO.getName());
+        itemIndicesList.forEach(index -> {
+            ItemDTO itemDTO = ItemDTO.getItemDTO(getInventoryItems().get(index));
+            itemDTOS.add(itemDTO);
+            addToCart(itemDTO.getName());
+            verifyCartBadge(String.valueOf(itemDTOS.size()));
+            verifyRemoveButton(itemDTO.getName());
+        });
         clickOnCart();
 
-        return itemDTO;
+        return itemDTOS;
     }
 
     public void logout() {

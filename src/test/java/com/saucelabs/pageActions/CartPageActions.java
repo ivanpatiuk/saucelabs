@@ -22,7 +22,7 @@ public class CartPageActions extends CartPage {
 
     private void verifyItemQTY(final WebElement item) {
         log.debug("Verifying item QTY.");
-        final String QTY = item.findElement(By.xpath("//div[@class='cart_quantity']")).getText();
+        final String QTY = item.findElement(By.xpath("./div[@class='cart_quantity']")).getText();
         Assert.assertEquals(QTY, "1");
     }
 
@@ -52,9 +52,9 @@ public class CartPageActions extends CartPage {
         });
     }
 
-    public void checkoutItem(final ItemDTO itemDTO) {
+    public void checkoutItems(final List<ItemDTO> itemDTOS) {
         verifyLogoAndUrl(TestVariables.CART_PAGE_URL);
-        verifyCartPageWithItems(List.of(itemDTO));
+        verifyCartPageWithItems(itemDTOS);
         clickOnCheckoutButton();
     }
 }

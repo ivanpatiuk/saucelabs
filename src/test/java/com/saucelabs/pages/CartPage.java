@@ -55,7 +55,7 @@ public class CartPage extends BaseDriver {
     public WebElement getCartItemByName(final String name) {
         log.debug("Getting cart item by name: {}", name);
         return cartItems.stream().filter(cartItem -> cartItem
-                        .findElement(By.xpath("//div[@class='inventory_item_name']"))
+                        .findElement(By.xpath(".//div[@class='inventory_item_name']"))
                         .getText()
                         .equals(name))
                 .findFirst()
