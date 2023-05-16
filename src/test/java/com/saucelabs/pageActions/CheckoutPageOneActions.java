@@ -1,13 +1,13 @@
-package com.saucelabs.steps;
+package com.saucelabs.pageActions;
 
 import com.saucelabs.pages.CheckoutPage;
 import org.openqa.selenium.WebDriver;
 
 import static com.saucelabs.entities.TestVariables.CHECKOUT_STEP_ONE_PAGE_URL;
 
-public class CheckoutStepOne extends CheckoutPage {
+public class CheckoutPageOneActions extends CheckoutPage {
 
-    public CheckoutStepOne(WebDriver driver) {
+    public CheckoutPageOneActions(WebDriver driver) {
         super(driver);
     }
 

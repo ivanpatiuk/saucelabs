@@ -1,4 +1,4 @@
-package com.saucelabs.steps;
+package com.saucelabs.pageActions;
 
 import com.google.common.collect.Ordering;
 import com.saucelabs.entities.OrderingTestData;
@@ -24,9 +24,9 @@ import static com.saucelabs.entities.TestVariables.ONE_SECOND;
 
 @Getter
 @Log4j2
-public class Shop extends ShopPage {
+public class ShopPageActions extends ShopPage {
 
-    public Shop(WebDriver driver) {
+    public ShopPageActions(WebDriver driver) {
         super(driver);
     }
 
@@ -41,9 +41,9 @@ public class Shop extends ShopPage {
         }
     }
 
-    private List<String> getElementsText(final Shop shop, final By by) {
+    private List<String> getElementsText(final ShopPageActions shopPageActions, final By by) {
         log.debug("Getting elements text.");
-        return shop
+        return shopPageActions
                 .findElementsBy(by, ONE_SECOND)
                 .stream()
                 .map(WebElement::getText)

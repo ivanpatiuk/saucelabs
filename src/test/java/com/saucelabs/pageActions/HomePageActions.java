@@ -1,4 +1,4 @@
-package com.saucelabs.steps;
+package com.saucelabs.pageActions;
 
 import com.saucelabs.entities.TestVariables;
 import com.saucelabs.pages.HomePage;
@@ -9,9 +9,9 @@ import org.openqa.selenium.WebDriver;
 
 
 @Log4j2
-public class Home extends HomePage {
+public class HomePageActions extends HomePage {
 
-    public Home(WebDriver driver) {
+    public HomePageActions(WebDriver driver) {
         super(driver);
     }
 

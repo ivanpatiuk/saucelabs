@@ -1,4 +1,4 @@
-package com.saucelabs.steps;
+package com.saucelabs.pageActions;
 
 import com.saucelabs.entities.TestVariables;
 import com.saucelabs.models.ItemDTO;
@@ -14,9 +14,9 @@ import java.util.List;
 import static com.saucelabs.entities.TestVariables.ONE_SECOND;
 
 @Log4j2
-public class Cart extends CartPage {
+public class CartPageActions extends CartPage {
 
-    public Cart(WebDriver driver) {
+    public CartPageActions(WebDriver driver) {
         super(driver);
     }
 

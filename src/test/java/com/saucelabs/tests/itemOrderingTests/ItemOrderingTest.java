@@ -1,9 +1,9 @@
 package com.saucelabs.tests.itemOrderingTests;
 
 import com.saucelabs.models.ItemDTO;
-import com.saucelabs.steps.Cart;
-import com.saucelabs.steps.CheckoutStepOne;
-import com.saucelabs.steps.Shop;
+import com.saucelabs.pageActions.CartPageActions;
+import com.saucelabs.pageActions.CheckoutPageOneActions;
+import com.saucelabs.pageActions.ShopPageActions;
 import com.saucelabs.tests.LoggedUserBaseTest;
 import org.testng.annotations.Test;
 
@@ -11,14 +11,14 @@ public class ItemOrderingTest extends LoggedUserBaseTest {
 
     @Test(dependsOnGroups = "login")
     void orderItemTestShouldSuccess() {
-        final Shop shop = new Shop(driver);
-        final ItemDTO itemDTO = shop.addToCartOneItem();
+        final ShopPageActions shopPageActions = new ShopPageActions(driver);
+        final ItemDTO itemDTO = shopPageActions.addToCartOneItem();
 
-        final Cart cart = new Cart(driver);
-        cart.checkoutItem(itemDTO);
+        final CartPageActions cartPageActions = new CartPageActions(driver);
+        cartPageActions.checkoutItem(itemDTO);
 
-        final CheckoutStepOne checkoutStepOnePage = new CheckoutStepOne(driver);
-        checkoutStepOnePage.checkoutItems();
+        final CheckoutPageOneActions checkoutPageOneActionsPage = new CheckoutPageOneActions(driver);
+        checkoutPageOneActionsPage.checkoutItems();
     }
 
 //    @Test (dependsOnGroups = "login")

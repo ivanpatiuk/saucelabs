@@ -1,7 +1,7 @@
 package com.saucelabs.tests.invenoryTests;
 
 import com.saucelabs.entities.OrderingTestData;
-import com.saucelabs.steps.Shop;
+import com.saucelabs.pageActions.ShopPageActions;
 import com.saucelabs.tests.LoggedUserBaseTest;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -20,25 +20,25 @@ public class InventoryTest extends LoggedUserBaseTest {
 
     @Test(dependsOnGroups = "login")
     void removingItemsTestShouldSuccess() {
-        final Shop shop = new Shop(driver);
-        shop.verifyItemsRemoving();
+        final ShopPageActions shopPageActions = new ShopPageActions(driver);
+        shopPageActions.verifyItemsRemoving();
     }
 
     @Test(dependsOnGroups = "login")
     void sortingTestShouldSuccess() {
-        final Shop shop = new Shop(driver);
-        shop.verifySorting(getOrderingTestDataList());
+        final ShopPageActions shopPageActions = new ShopPageActions(driver);
+        shopPageActions.verifySorting(getOrderingTestDataList());
     }
 
     @Test(dependsOnGroups = "login")
     void descriptionTestShouldSuccess() {
-        final Shop shop = new Shop(driver);
-        shop.verifyDescription();
+        final ShopPageActions shopPageActions = new ShopPageActions(driver);
+        shopPageActions.verifyDescription();
     }
 
     @Test(dependsOnGroups = "login")
     void openingItemTestShouldSuccess() {
-        final Shop shop = new Shop(driver);
-        shop.verifyItemsOpening();
+        final ShopPageActions shopPageActions = new ShopPageActions(driver);
+        shopPageActions.verifyItemsOpening();
     }
 }

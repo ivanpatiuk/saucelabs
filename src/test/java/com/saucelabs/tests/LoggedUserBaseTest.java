@@ -1,7 +1,7 @@
 package com.saucelabs.tests;
 
 import com.saucelabs.entities.TestVariables;
-import com.saucelabs.steps.Home;
+import com.saucelabs.pageActions.HomePageActions;
 import com.saucelabs.testconfig.WebManager;
 import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.BeforeMethod;
@@ -14,8 +14,8 @@ public abstract class LoggedUserBaseTest extends BaseTest {
         try {
             log.debug("Before method setup");
             driver = WebManager.getChromeDriver();
-            final Home home = new Home(driver);
-            home.successfulLogin(TestVariables.TESTED_USER_NAME, TestVariables.VALID_PASSWORD);
+            final HomePageActions homePageActions = new HomePageActions(driver);
+            homePageActions.successfulLogin(TestVariables.TESTED_USER_NAME, TestVariables.VALID_PASSWORD);
         } catch (Exception e){
             log.error("Running test was interrupted.");
             driver.quit();
