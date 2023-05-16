@@ -1,6 +1,7 @@
 package com.saucelabs.pages;
 
 import com.saucelabs.entities.TestVariables;
+import com.saucelabs.pages.base.CartBasePage;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -13,11 +14,7 @@ import java.util.List;
 
 @Getter
 @Log4j2
-public class CartPage extends BaseDriver {
-    @FindBy(xpath = "//div[@id='shopping_cart_container']/a")
-    private WebElement shoppingCartButton;
-    @FindBy(xpath = "//*[@class='shopping_cart_container']//span[@class='shopping_cart_badge']")
-    private WebElement cartBadgeCounter;
+public class CartPage extends CartBasePage {
     @FindBy(xpath = "//button[@id='checkout']")
     private WebElement checkoutButton;
     @FindBy(xpath = "//button[contains(@id, \"remove\")]")
@@ -32,13 +29,10 @@ public class CartPage extends BaseDriver {
         PageFactory.initElements(driver, this);
     }
 
-    public void clickOnShoppingCartButton() {
-        waitUntilClickable(shoppingCartButton, TestVariables.ONE_SECOND);
-        shoppingCartButton.click();
-    }
+
 
     public void clickOnCheckoutButton() {
-        waitUntilClickable(shoppingCartButton, TestVariables.ONE_SECOND);
+        waitUntilClickable(checkoutButton, TestVariables.ONE_SECOND);
         checkoutButton.click();
     }
 

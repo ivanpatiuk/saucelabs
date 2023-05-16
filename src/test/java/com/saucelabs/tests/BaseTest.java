@@ -1,6 +1,6 @@
 package com.saucelabs.tests;
 
-import com.saucelabs.pages.BaseDriver;
+import com.saucelabs.pages.base.BaseDriver;
 import com.saucelabs.testconfig.WebManager;
 import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.AfterMethod;

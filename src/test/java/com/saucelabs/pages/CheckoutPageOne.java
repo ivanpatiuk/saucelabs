@@ -1,5 +1,6 @@
 package com.saucelabs.pages;
 
+import com.saucelabs.pages.base.CheckoutBasePage;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
@@ -11,13 +12,9 @@ import static com.saucelabs.entities.TestVariables.ONE_SECOND;
 
 @Getter
 @Log4j2
-public class CheckoutPage extends BaseDriver {
-    @FindBy(xpath = "//*[@class='shopping_cart_container']//span[@class='shopping_cart_badge']")
-    private WebElement cartBadgeCounter;
+public class CheckoutPageOne extends CheckoutBasePage {
     @FindBy(xpath = "//input[@id='continue']")
     private WebElement continueInputButton;
-    @FindBy(xpath = "//input[@id='cancel']")
-    private WebElement cancelButton;
     @FindBy(xpath = "//input[@id='first-name']")
     private WebElement firstNameInput;
     @FindBy(xpath = "//input[@id='last-name']")
@@ -25,7 +22,7 @@ public class CheckoutPage extends BaseDriver {
     @FindBy(xpath = "//input[@id='postal-code']")
     private WebElement postalCodeInput;
 
-    public CheckoutPage(WebDriver driver) {
+    public CheckoutPageOne(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
@@ -34,12 +31,6 @@ public class CheckoutPage extends BaseDriver {
         log.debug("Clicking on 'Continue' button.");
         waitUntilClickable(continueInputButton, ONE_SECOND);
         continueInputButton.submit();
-    }
-
-    public void clickOnCancelButton() {
-        log.debug("Clicking on 'Cancel' button.");
-        waitUntilClickable(cancelButton, ONE_SECOND);
-        cancelButton.click();
     }
 
     public void enterFirstName(final String firstName) {

@@ -1,5 +1,6 @@
 package com.saucelabs.pages;
 
+import com.saucelabs.pages.base.BaseDriver;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
