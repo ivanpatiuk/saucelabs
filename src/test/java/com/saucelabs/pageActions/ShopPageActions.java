@@ -112,7 +112,7 @@ public class ShopPageActions extends ShopPage {
             // CREATE ITEM BEFORE CLICKING
             final WebElement itemFromShopPage = findElementBy(By.xpath("//div[@class='inventory_item_label']//div[contains(text(), '" + itemTitle + "')]/ancestor::div[@class='inventory_item']"), ONE_SECOND);
             final ItemDTO itemBeforeClicking = ItemDTO.getItemDTO(itemFromShopPage);
-            final WebElement titleButton = findElementBy(By.xpath("//div[@class='inventory_item_label']/a[contains(@id,'link')]"), ONE_SECOND);
+            final WebElement titleButton = itemFromShopPage.findElement(By.xpath(".//div[@class='inventory_item_label']/a[contains(@id,'link')]"));
 
             waitUntilClickable(titleButton, ONE_SECOND);
             titleButton.click();
