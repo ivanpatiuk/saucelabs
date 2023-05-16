@@ -22,7 +22,7 @@ public class ItemOrderingTest extends LoggedUserBaseTest {
         };
     }
 
-    @Test(dataProvider = "itemsDataProvider")
+    @Test(dependsOnGroups = "login", dataProvider = "itemsDataProvider")
     void orderItemsTestShouldSuccess(final List<Integer> itemIndicesList) {
         final ShopPageActions shopPageActions = new ShopPageActions(driver);
         final List<ItemDTO> itemDTOS = shopPageActions.addItemsToCart(itemIndicesList);
