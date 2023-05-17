@@ -24,6 +24,7 @@ public abstract class CartBasePage extends BaseDriver {
     }
 
     public void clickOnShoppingCartButton() {
+        log.debug("Clicking on shopping cart button.");
         waitUntilClickable(shoppingCartButton, TestVariables.ONE_SECOND);
         shoppingCartButton.click();
     }

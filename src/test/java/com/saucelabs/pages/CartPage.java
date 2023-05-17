@@ -25,16 +25,19 @@ public class CartPage extends CartItemsBasePage {
     }
 
     public void clickOnCheckoutButton() {
+        log.debug("Clicking on 'Checkout' button.");
         waitUntilClickable(checkoutButton, TestVariables.ONE_SECOND);
         checkoutButton.click();
     }
 
     public void clickOnRemoveButton() {
+        log.debug("Clicking on 'Remove' button.");
         waitUntilClickable(removeButton, TestVariables.ONE_SECOND);
         removeButton.click();
     }
 
     public void clickOnContinueShippingButton() {
+        log.debug("Clicking on 'Continue shipping' button.");
         waitUntilClickable(continueShippingButton, TestVariables.ONE_SECOND);
         continueShippingButton.click();
     }

@@ -29,7 +29,7 @@ public class HomePage extends BaseDriver {
     }
 
     public void enterUsername(final String username) {
-        log.debug("Entering username: {}.", username);
+        log.debug("Entering username: '{}'.", username);
         waitUntilClickable(this.username, TestVariables.ONE_SECOND);
         this.username.sendKeys(username);
     }

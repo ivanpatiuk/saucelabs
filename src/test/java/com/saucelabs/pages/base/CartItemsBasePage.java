@@ -21,12 +21,12 @@ public abstract class CartItemsBasePage extends CartBasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement getCartItemByName(final String name) {
-        log.debug("Getting cart item by name: {}", name);
+    public WebElement getCartItemByName(final String itemName) {
+        log.debug("Getting cart item by name: '{}'.", itemName);
         return cartItems.stream().filter(cartItem -> cartItem
                         .findElement(By.xpath(".//div[@class='inventory_item_name']"))
                         .getText()
-                        .equals(name))
+                        .equals(itemName))
                 .findFirst()
                 .orElse(null);
     }

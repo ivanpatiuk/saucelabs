@@ -39,7 +39,7 @@ public class ShopPage extends BaseDriver {
     }
 
     private void clickOnAddOrRemove(final String itemName) {
-        log.debug("Click on 'Add to cart' or 'Remove from cart' button for: {}", itemName);
+        log.debug("Click on 'Add to cart' or 'Remove from cart' button for: '{}'.", itemName);
         final WebElement button = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", itemName)), ONE_SECOND);
         waitUntilClickable(button, ONE_SECOND);
         button.click();
@@ -50,19 +50,19 @@ public class ShopPage extends BaseDriver {
     }
 
     public void selectOrdering(final String itemName) {
-        log.debug("Selecting ordering: {}.", itemName);
+        log.debug("Selecting ordering: '{}'.", itemName);
         final Select select = new Select(findElementBy(selectOrderingButton, ONE_SECOND));
         select.selectByVisibleText(itemName);
     }
 
 
     public void addToCart(final String itemName) {
-        log.debug("Adding to cart: {}.", itemName);
+        log.debug("Adding to cart: '{}'.", itemName);
         clickOnAddOrRemove(itemName);
     }
 
     public void removeItem(final String itemName) {
-        log.debug("Removing from cart: {}.", itemName);
+        log.debug("Removing from cart: '{}'.", itemName);
         clickOnAddOrRemove(itemName);
     }
 
