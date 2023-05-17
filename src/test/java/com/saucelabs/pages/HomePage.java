@@ -28,19 +28,20 @@ public class HomePage extends BaseDriver {
         PageFactory.initElements(driver, this);
     }
 
-    public void enterUsername(final String string) {
-        log.debug("Entering username: {}", string);
-        waitUntilClickable(username, TestVariables.ONE_SECOND);
-        username.sendKeys(string);
+    public void enterUsername(final String username) {
+        log.debug("Entering username: {}.", username);
+        waitUntilClickable(this.username, TestVariables.ONE_SECOND);
+        this.username.sendKeys(username);
     }
 
-    public void enterPassword(final String string) {
-        log.debug("Entering password");
-        waitUntilClickable(username, TestVariables.ONE_SECOND);
-        password.sendKeys(string);
+    public void enterPassword(final String password) {
+        log.debug("Entering password.");
+        waitUntilClickable(this.password, TestVariables.ONE_SECOND);
+        this.password.sendKeys(password);
     }
 
     public void clickOnLoginButton() {
+        log.debug("Clicking on 'Login' button.");
         waitUntilClickable(username, TestVariables.ONE_SECOND);
         loginButton.click();
     }

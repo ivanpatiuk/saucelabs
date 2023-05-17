@@ -38,8 +38,9 @@ public class ShopPage extends BaseDriver {
         PageFactory.initElements(driver, this);
     }
 
-    private void clickOnAddOrRemove(final String string) {
-        final WebElement button = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", string)), ONE_SECOND);
+    private void clickOnAddOrRemove(final String itemName) {
+        log.debug("Click on 'Add to cart' or 'Remove from cart' button for: {}", itemName);
+        final WebElement button = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", itemName)), ONE_SECOND);
         waitUntilClickable(button, ONE_SECOND);
         button.click();
     }
@@ -48,38 +49,38 @@ public class ShopPage extends BaseDriver {
         return cartBadgeCounter.getText();
     }
 
-    public void selectOrdering(final String string) {
-        log.debug("Selecting ordering: {}", string);
+    public void selectOrdering(final String itemName) {
+        log.debug("Selecting ordering: {}.", itemName);
         final Select select = new Select(findElementBy(selectOrderingButton, ONE_SECOND));
-        select.selectByVisibleText(string);
+        select.selectByVisibleText(itemName);
     }
 
 
-    public void addToCart(final String string) {
-        log.debug("Adding to cart: {}", string);
-        clickOnAddOrRemove(string);
+    public void addToCart(final String itemName) {
+        log.debug("Adding to cart: {}.", itemName);
+        clickOnAddOrRemove(itemName);
     }
 
-    public void removeItem(final String string) {
-        log.debug("Removing from cart: {}", string);
-        clickOnAddOrRemove(string);
+    public void removeItem(final String itemName) {
+        log.debug("Removing from cart: {}.", itemName);
+        clickOnAddOrRemove(itemName);
     }
 
     public void clickOnCart() {
-        log.debug("Clicking on cart");
+        log.debug("Clicking on cart.");
         waitUntilClickable(shoppingCartButton, ONE_SECOND);
         shoppingCartButton.click();
         verifyUrl("https://www.saucedemo.com/cart.html");
     }
 
     public void clickOnSideBar() {
-        log.debug("Clicking on side bar");
+        log.debug("Clicking on side bar.");
         waitUntilClickable(sidebar, ONE_SECOND);
         sidebar.click();
     }
 
     public void clickOnLogout(){
-        log.debug("Clicking on logout");
+        log.debug("Clicking on logout.");
         waitUntilClickable(logout, ONE_SECOND);
         logout.click();
     }

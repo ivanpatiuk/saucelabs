@@ -31,7 +31,7 @@ public class ItemPage extends BaseDriver {
     }
 
     public void clickOnBackToProductsButton(){
-        log.debug("Clicking on 'Back to products' button");
+        log.debug("Clicking on 'Back to products' button.");
         waitUntilClickable(backToProductsButton, TestVariables.ONE_SECOND);
         backToProductsButton.click();
     }
