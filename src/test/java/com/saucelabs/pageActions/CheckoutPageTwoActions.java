@@ -2,6 +2,7 @@ package com.saucelabs.pageActions;
 
 import com.saucelabs.models.ItemDTO;
 import com.saucelabs.pages.CheckoutPageTwo;
+import com.saucelabs.verifiers.IBaseItemVerify;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,7 @@ public class CheckoutPageTwoActions extends CheckoutPageTwo implements IBaseItem
     }
 
     private Double accumulatePrice(final List<ItemDTO> itemDTOS) {
+        log.debug("Accumulating prices.");
         return itemDTOS
                 .stream()
                 .map(itemDTO -> Double.parseDouble(itemDTO.getPrice().substring(1)))
@@ -27,6 +29,7 @@ public class CheckoutPageTwoActions extends CheckoutPageTwo implements IBaseItem
     }
 
     private void verifyPrices(final List<ItemDTO> itemDTOS) {
+        log.debug("Verifying prices.");
         final Double expectedDoubleItemTotalPrice = accumulatePrice(itemDTOS);
         final String actualItemTotalPrice = getItemTotalPrice().getText();
         final double actualDoubleItemTotalPrice = Double.parseDouble(actualItemTotalPrice.substring(actualItemTotalPrice.lastIndexOf("Item total: $") + 13));
@@ -43,6 +46,7 @@ public class CheckoutPageTwoActions extends CheckoutPageTwo implements IBaseItem
     }
 
     public void finishCheckout(final List<ItemDTO> expectedItemDTOList) {
+        log.debug("Finishing checkout.");
         verifyCartPageWithItems(expectedItemDTOList);
         verifyPrices(expectedItemDTOList);
         clickOnFinishButton();
@@ -57,7 +61,7 @@ public class CheckoutPageTwoActions extends CheckoutPageTwo implements IBaseItem
     }
 
     @Override
-    public void verifyCartPageWithItems(List<ItemDTO> itemDTOS) {
+    public void verifyCartPageWithItems(final List<ItemDTO> itemDTOS) {
         log.debug("Verifying checkout page item with items count: {}.", itemDTOS.size());
         Assert.assertEquals(getCartBadgeCounter().getText(), String.valueOf(itemDTOS.size()));
         verifyUIElements();

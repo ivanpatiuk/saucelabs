@@ -1,4 +1,4 @@
-package com.saucelabs.pageActions;
+package com.saucelabs.verifiers;
 
 import com.saucelabs.models.ItemDTO;
 import org.openqa.selenium.By;

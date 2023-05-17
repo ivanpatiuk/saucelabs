@@ -3,6 +3,7 @@ package com.saucelabs.pageActions;
 import com.saucelabs.entities.TestVariables;
 import com.saucelabs.models.ItemDTO;
 import com.saucelabs.pages.CartPage;
+import com.saucelabs.verifiers.IBaseItemVerify;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,6 +43,7 @@ public class CartPageActions extends CartPage implements IBaseItemVerify {
     }
 
     public void checkoutItems(final List<ItemDTO> itemDTOS) {
+        log.debug("Checkout items.");
         verifyLogoAndUrl(TestVariables.CART_PAGE_URL);
         verifyCartPageWithItems(itemDTOS);
         clickOnCheckoutButton();
