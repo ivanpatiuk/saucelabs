@@ -74,6 +74,11 @@ public abstract class BaseDriver {
         Assert.assertTrue(actual.contains(expected));
     }
 
+    public void verifyTextContains(final WebElement webElement, final String expected) {
+        String actual = webElement.getText();
+        Assert.assertTrue(actual.contains(expected));
+    }
+
     public void verifyLogoAndUrl(final String url) {
         verifyUrl(url);
         verifyTextContains(By.xpath("//div[@id=\"header_container\"]//div[@class=\"app_logo\"]"), "Swag Labs");

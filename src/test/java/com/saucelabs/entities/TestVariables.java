@@ -1,6 +1,9 @@
 package com.saucelabs.entities;
 
 import com.saucelabs.ymlconfig.TestConfiguration;
+import org.openqa.selenium.By;
+
+import java.util.List;
 
 public class TestVariables {
     public static final String TESTED_USER_NAME = TestConfiguration.getProperties().getUsersCredentials().getTestedUserName();
@@ -18,5 +21,8 @@ public class TestVariables {
     public static final String CART_PAGE_URL = HOME_PAGE_URL + "cart.html";
 
     public static final long ONE_SECOND = 1000;
+
+    public static final List<By> INVENTORY_ITEM_XPATHS = List.of(By.xpath(".//div[@class='inventory_item_name']"), By.xpath(".//div[@class='inventory_item_desc']"), By.xpath(".//div[@class='inventory_item_price']"));
+    public static final List<By> INVENTORY_DETAILS_XPATHS = List.of(By.xpath(".//div[contains(@class,'inventory_details_name')]"), By.xpath(".//div[contains(@class,'inventory_details_desc large_size')]"), By.xpath(".//div[contains(@class,'inventory_details_price')]"));
 }
 

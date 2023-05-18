@@ -28,4 +28,8 @@ public abstract class CartBasePage extends BaseDriver {
         waitUntilClickable(shoppingCartButton, TestVariables.ONE_SECOND);
         shoppingCartButton.click();
     }
+
+    public String getCartBadgeCounterText() {
+        return cartBadgeCounter.getText();
+    }
 }

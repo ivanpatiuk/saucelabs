@@ -11,6 +11,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
+import static com.saucelabs.entities.TestVariables.INVENTORY_ITEM_XPATHS;
 import static com.saucelabs.entities.TestVariables.ONE_SECOND;
 
 @Log4j2
@@ -23,13 +24,13 @@ public class CartPageActions extends CartPage implements IBaseItemVerify {
     @Override
     public void verifyCartPageWithItems(final List<ItemDTO> itemDTOS) {
         log.debug("Verifying cart page item with items count: {}.", itemDTOS.size());
-        Assert.assertEquals(getCartBadgeCounter().getText(), String.valueOf(itemDTOS.size()));
+        Assert.assertEquals(getCartBadgeCounterText(), String.valueOf(itemDTOS.size()));
         verifyUIElements();
         itemDTOS.forEach(itemDTO -> {
             log.debug("Verifying cart page item: {}.", itemDTO.getName());
             final WebElement item = getCartItemByName(itemDTO.getName());
             verifyItemQTY(item);
-            verifyItemDescription(item);
+            verifyItemDescription(item, itemDTO, INVENTORY_ITEM_XPATHS);
         });
     }
 
@@ -47,5 +48,10 @@ public class CartPageActions extends CartPage implements IBaseItemVerify {
         verifyLogoAndUrl(TestVariables.CART_PAGE_URL);
         verifyCartPageWithItems(itemDTOS);
         clickOnCheckoutButton();
+    }
+
+    // TODO
+    public void clickOnRemoveButton() {
+        log.debug("Clicking on 'Remove' button.");
     }
 }

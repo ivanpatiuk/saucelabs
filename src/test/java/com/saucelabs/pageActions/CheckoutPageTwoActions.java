@@ -10,6 +10,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
+import static com.saucelabs.entities.TestVariables.INVENTORY_ITEM_XPATHS;
 import static com.saucelabs.entities.TestVariables.ONE_SECOND;
 
 @Log4j2
@@ -63,13 +64,13 @@ public class CheckoutPageTwoActions extends CheckoutPageTwo implements IBaseItem
     @Override
     public void verifyCartPageWithItems(final List<ItemDTO> itemDTOS) {
         log.debug("Verifying checkout page item with items count: {}.", itemDTOS.size());
-        Assert.assertEquals(getCartBadgeCounter().getText(), String.valueOf(itemDTOS.size()));
+        Assert.assertEquals(getCartBadgeCounterText(), String.valueOf(itemDTOS.size()));
         verifyUIElements();
         itemDTOS.forEach(itemDTO -> {
             log.debug("Verifying checkout page item: {}.", itemDTO.getName());
             final WebElement item = getCartItemByName(itemDTO.getName());
             verifyItemQTY(item);
-            verifyItemDescription(item);
+            verifyItemDescription(item, itemDTO, INVENTORY_ITEM_XPATHS);
         });
     }
 }

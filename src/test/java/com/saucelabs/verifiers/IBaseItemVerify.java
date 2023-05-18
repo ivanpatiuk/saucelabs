@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.List;
 
 public interface IBaseItemVerify {
@@ -13,12 +14,16 @@ public interface IBaseItemVerify {
         Assert.assertEquals(QTY, "1");
     }
 
-    default void verifyItemDescription(final WebElement item) {
-        final ItemDTO cartPageItemDTO = ItemDTO.getItemDTO(item);
-        Assert.assertEquals(cartPageItemDTO, cartPageItemDTO);
+    default void verifyItemDescription(final WebElement webElement, final ItemDTO expected, final List<By> xpaths) {
+        final ItemDTO actual = ItemDTO.getItemDTO(webElement, xpaths);
+        Assert.assertEquals(actual, expected);
     }
 
-    void verifyUIElements();
+    default void verifyUIElements() throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("The method is not overridden.");
+    }
 
-    void verifyCartPageWithItems(final List<ItemDTO> itemDTOS);
+    default void verifyCartPageWithItems(final List<ItemDTO> itemDTOS) throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("The method is not overridden.");
+    }
 }

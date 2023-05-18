@@ -6,26 +6,18 @@ import com.saucelabs.pageActions.CheckoutPageOneActions;
 import com.saucelabs.pageActions.CheckoutPageTwoActions;
 import com.saucelabs.pageActions.ShopPageActions;
 import com.saucelabs.tests.LoggedUserBaseTest;
-import org.testng.annotations.DataProvider;
+import com.saucelabs.tests.TestDataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class ItemOrderingTest extends LoggedUserBaseTest {
+public class ItemsOrderingTest extends LoggedUserBaseTest {
 
-    @DataProvider
-    Object[][] itemsDataProvider() {
-        return new Object[][]{
-                {List.of(0)},
-                {List.of(5)},
-                {List.of(0, 1, 2, 3, 4, 5)}
-        };
-    }
-
-    @Test(dependsOnGroups = "login", dataProvider = "itemsDataProvider")
+    @Test(dependsOnGroups = "login", dataProviderClass = TestDataProvider.class, dataProvider = "itemIndicesDataProvider")
     void orderItemsTestShouldSuccess(final List<Integer> itemIndicesList) {
         final ShopPageActions shopPageActions = new ShopPageActions(driver);
-        final List<ItemDTO> itemDTOS = shopPageActions.addItemsToCart(itemIndicesList);
+        final List<ItemDTO> itemDTOS = shopPageActions.addItemsToCartByIndices(itemIndicesList);
+        shopPageActions.verifyClickingOnShoppingCart();
 
         final CartPageActions cartPageActions = new CartPageActions(driver);
         cartPageActions.checkoutItems(itemDTOS);

@@ -5,6 +5,7 @@ import com.saucelabs.entities.OrderingTestData;
 import com.saucelabs.models.ItemDTO;
 import com.saucelabs.pages.ItemPage;
 import com.saucelabs.pages.ShopPage;
+import com.saucelabs.verifiers.IBadgeCounterVerify;
 import io.netty.util.internal.StringUtil;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -19,12 +20,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.saucelabs.entities.TestVariables.HOME_PAGE_URL;
-import static com.saucelabs.entities.TestVariables.ONE_SECOND;
+import static com.saucelabs.entities.TestVariables.*;
 
 @Getter
 @Log4j2
-public class ShopPageActions extends ShopPage {
+public class ShopPageActions extends ShopPage implements IBadgeCounterVerify {
 
     public ShopPageActions(WebDriver driver) {
         super(driver);
@@ -50,31 +50,25 @@ public class ShopPageActions extends ShopPage {
                 .collect(Collectors.toList());
     }
 
-    private void verifyCartBadge(final String expected) {
-        log.debug("Verifying cart badge.");
-        final String actual = getCartBadgeCounter();
-        Assert.assertEquals(actual, expected);
-    }
-
-    private void verifyRemoveButton(final String itemName) {
+    private void verifyRemoveButton(final String itemName, final String expected) {
         log.debug("Verifying remove button for item: '{}'", itemName);
         final String buttonText = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", itemName)), ONE_SECOND).getText();
-        Assert.assertEquals("Remove", buttonText);
+        Assert.assertEquals(buttonText, expected);
     }
 
     private void verifyItemAdding(final int expectedCounter, final WebElement webElementItem, final List<ItemDTO> itemDTOS) {
-        final ItemDTO itemDTO = ItemDTO.getItemDTO(webElementItem);
+        final ItemDTO itemDTO = ItemDTO.getItemDTO(webElementItem, INVENTORY_ITEM_XPATHS);
         log.debug("Verifying adding the item: '{}'.", itemDTO.getName());
         itemDTOS.add(itemDTO);
-        addToCart(itemDTO.getName());
-        verifyCartBadge(String.valueOf(expectedCounter));
+        addItemToCartByName(itemDTO.getName());
+        verifyCartBadge(getCartBadgeCounter(), String.valueOf(expectedCounter));
     }
 
     private void verifyItemRemoving(final int expectedCounter, final ItemDTO itemDTO) {
         log.debug("Verifying removing the item: '{}'.", itemDTO.getName());
         removeItem(itemDTO.getName());
         if (expectedCounter != 0) {
-            verifyCartBadge(String.valueOf(expectedCounter));
+            verifyCartBadge(getCartBadgeCounter(), String.valueOf(expectedCounter));
         }
     }
 
@@ -90,7 +84,7 @@ public class ShopPageActions extends ShopPage {
             verifyItemRemoving(--expectedCounter, itemDTO);
         }
 
-        Assert.assertThrows(NoSuchElementException.class, () -> verifyCartBadge("6"));
+        Assert.assertThrows(NoSuchElementException.class, () -> verifyCartBadge(getCartBadgeCounter(), "6"));
     }
 
     public void verifySorting(final List<OrderingTestData> orderingTestDataList) {
@@ -105,26 +99,29 @@ public class ShopPageActions extends ShopPage {
         });
     }
 
+    public ItemDTO clickOnItemByName(final String itemName) {
+        log.debug("Clicking on item by item name: '{}'", itemName);
+        final WebElement itemFromShopPage = findElementBy(By.xpath("//div[@class='inventory_item_label']//div[contains(text(), '" + itemName + "')]/ancestor::div[@class='inventory_item']"), ONE_SECOND);
+        final ItemDTO itemBeforeClicking = ItemDTO.getItemDTO(itemFromShopPage, INVENTORY_ITEM_XPATHS);
+        final WebElement titleButton = itemFromShopPage.findElement(By.xpath(".//div[@class='inventory_item_label']/a[contains(@id,'link')]"));
+
+        waitUntilClickable(titleButton, ONE_SECOND);
+        titleButton.click();
+
+        return itemBeforeClicking;
+    }
+
     public void verifyItemsOpening() {
         log.debug("Verifying items opening.");
-        final List<String> itemTitles = findElementsBy(By.xpath("//div[@class='inventory_list']//div[@class='inventory_item_name']"), ONE_SECOND).stream().map(WebElement::getText).toList();
-        itemTitles.forEach(itemTitle -> {
+        final List<String> itemNames = findElementsBy(By.xpath("//div[@class='inventory_list']//div[@class='inventory_item_name']"), ONE_SECOND).stream().map(WebElement::getText).toList();
+        itemNames.forEach(itemName -> {
             // CREATE ITEM BEFORE CLICKING
-            final WebElement itemFromShopPage = findElementBy(By.xpath("//div[@class='inventory_item_label']//div[contains(text(), '" + itemTitle + "')]/ancestor::div[@class='inventory_item']"), ONE_SECOND);
-            final ItemDTO itemBeforeClicking = ItemDTO.getItemDTO(itemFromShopPage);
-            final WebElement titleButton = itemFromShopPage.findElement(By.xpath(".//div[@class='inventory_item_label']/a[contains(@id,'link')]"));
-
-            waitUntilClickable(titleButton, ONE_SECOND);
-            titleButton.click();
+            final ItemDTO itemBeforeClicking = clickOnItemByName(itemName);
 
             // CREATE ITEM AFTER CLICKING
             final ItemPage itemPage = new ItemPage(driver);
             final WebElement itemFromItemPage = itemPage.getItem();
-            final ItemDTO itemAfterClicking = ItemDTO.getItemDTO(
-                    itemFromItemPage,
-                    By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_name')]"),
-                    By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_desc')]"),
-                    By.xpath("//div[@class='inventory_details_desc_container']//div[contains(@class, 'inventory_details_price')]"));
+            final ItemDTO itemAfterClicking = ItemDTO.getItemDTO(itemFromItemPage, INVENTORY_DETAILS_XPATHS);
 
             // MOVE TO THE SHOP PAGE AND ASSERT
             itemPage.clickOnBackToProductsButton();
@@ -134,24 +131,35 @@ public class ShopPageActions extends ShopPage {
 
     public void verifyDescription() {
         log.debug("Verifying description.");
-        final List<ItemDTO> itemDTOS = getInventoryItems().stream().map(ItemDTO::getItemDTO).toList();
+        final List<ItemDTO> itemDTOS = getInventoryItems().stream().map(webElement -> ItemDTO.getItemDTO(webElement, INVENTORY_ITEM_XPATHS)).toList();
         itemDTOS.forEach(description -> Assert.assertFalse(StringUtil.isNullOrEmpty(description.getDescription())));
     }
 
-    public List<ItemDTO> addItemsToCart(final List<Integer> itemIndicesList) {
-        log.debug("Verifying items ordering: {}", itemIndicesList);
+    public void verifyItemIsNotInCart(final ItemDTO itemDTO) {
+        log.debug("Verifying that item is not in the cart: '{}'", itemDTO.getName());
+        verifyCartBadge(getCartBadgeCounter(), null);
+        verifyRemoveButton(itemDTO.getName(), "Add to cart");
+    }
+
+    public List<ItemDTO> addItemsToCartByIndices(final List<Integer> itemIndicesList) {
+        log.debug("Adding items to the cart with indices: {}", itemIndicesList);
         final List<ItemDTO> itemDTOS = new ArrayList<>();
 
         itemIndicesList.forEach(index -> {
-            ItemDTO itemDTO = ItemDTO.getItemDTO(getInventoryItems().get(index));
+            ItemDTO itemDTO = ItemDTO.getItemDTO(getInventoryItems().get(index), INVENTORY_ITEM_XPATHS);
             itemDTOS.add(itemDTO);
-            addToCart(itemDTO.getName());
-            verifyCartBadge(String.valueOf(itemDTOS.size()));
-            verifyRemoveButton(itemDTO.getName());
+            addItemToCartByName(itemDTO.getName());
+            verifyCartBadge(getCartBadgeCounter(), String.valueOf(itemDTOS.size()));
+            verifyRemoveButton(itemDTO.getName(), "Remove");
         });
-        clickOnCart();
 
         return itemDTOS;
+    }
+
+    public ItemDTO addItemToCartAndClickOnItem(final Integer index) {
+        final ItemDTO addedItem = addItemsToCartByIndices(List.of(index)).get(0);
+        clickOnItemByName(addedItem.getName());
+        return addedItem;
     }
 
     public void logout() {
