@@ -54,9 +54,17 @@ public class CartPageActions extends CartPage implements IBaseItemVerify {
     }
 
     public void verifyContinuingShoppingWithEmptyCart() {
-        log.debug("Verifying clicking on 'Continue shopping' on cart page with empty cart.");
+        log.debug("Verifying clicking on 'Continue shipping' on cart page with empty the cart.");
         baseCartPageVerify();
-        clickOnShoppingCartButton();
+        clickOnContinueShippingButton();
+        verifyUrl(SHOP_PAGE_URL);
+    }
+
+    public void verifyContinuingShoppingWithItemsInCart(final List<ItemDTO> itemDTOS) {
+        log.debug("Verifying clicking on 'Continue shipping' on cart page with items in the cart.");
+        verifyCartPageWithItems(itemDTOS);
+        clickOnContinueShippingButton();
+        verifyUrl(SHOP_PAGE_URL);
     }
 
     public void checkoutItems(final List<ItemDTO> itemDTOS) {
@@ -64,6 +72,7 @@ public class CartPageActions extends CartPage implements IBaseItemVerify {
         baseCartPageVerify();
         verifyCartPageWithItems(itemDTOS);
         clickOnCheckoutButton();
+        verifyUrl(CHECKOUT_STEP_ONE_PAGE_URL);
     }
 
     // TODO

@@ -52,7 +52,6 @@ public class ShopPageActions extends ShopPage implements IBadgeCounterVerify {
 
     private void verifyRemoveButton(final String itemName, final String expected) {
         log.debug("Verifying remove button for item: '{}'", itemName);
-        System.out.println(BY_ITEM.replace("<item_title>", itemName));
         final String buttonText = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", itemName)), ONE_SECOND).getText();
         Assert.assertEquals(buttonText, expected);
     }
@@ -156,6 +155,12 @@ public class ShopPageActions extends ShopPage implements IBadgeCounterVerify {
         log.debug("Verifying that item is in the cart: '{}'", itemDTO.getName());
         verifyCartBadge(getCartBadgeCounter(), String.valueOf(expectedBadgeCounter));
         verifyRemoveButton(itemDTO.getName(), "Remove");
+    }
+
+    public void verifyItemsIsInCart(final List<ItemDTO> itemDTOS) {
+        log.debug("Verifying that items are in the cart.");
+        verifyCartBadge(getCartBadgeCounter(), String.valueOf(itemDTOS.size()));
+        itemDTOS.forEach(itemDTO -> verifyRemoveButton(itemDTO.getName(), "Remove"));
     }
 
     public void verifyNoItemIsInCart() {
