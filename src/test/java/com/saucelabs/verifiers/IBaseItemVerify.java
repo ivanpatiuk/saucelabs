@@ -19,7 +19,7 @@ public interface IBaseItemVerify {
         Assert.assertEquals(actual, expected);
     }
 
-    default void verifyUIElements() throws OperationNotSupportedException {
+    default void verifyCartPage() throws OperationNotSupportedException {
         throw new OperationNotSupportedException("The method is not overridden.");
     }
 

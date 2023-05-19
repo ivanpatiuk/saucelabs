@@ -54,7 +54,7 @@ public class CheckoutPageTwoActions extends CheckoutPageTwo implements IBaseItem
     }
 
     @Override
-    public void verifyUIElements() {
+    public void verifyCartPage() {
         log.debug("Verifying checkout page UI elements.");
         waitUntilClickable(getFinishButton(), ONE_SECOND);
         waitUntilClickable(getCancelButton(), ONE_SECOND);
@@ -65,7 +65,7 @@ public class CheckoutPageTwoActions extends CheckoutPageTwo implements IBaseItem
     public void verifyCartPageWithItems(final List<ItemDTO> itemDTOS) {
         log.debug("Verifying checkout page item with items count: {}.", itemDTOS.size());
         Assert.assertEquals(getCartBadgeCounterText(), String.valueOf(itemDTOS.size()));
-        verifyUIElements();
+        verifyCartPage();
         itemDTOS.forEach(itemDTO -> {
             log.debug("Verifying checkout page item: {}.", itemDTO.getName());
             final WebElement item = getCartItemByName(itemDTO.getName());

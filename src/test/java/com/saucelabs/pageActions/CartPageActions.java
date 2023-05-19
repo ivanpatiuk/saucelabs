@@ -1,6 +1,5 @@
 package com.saucelabs.pageActions;
 
-import com.saucelabs.entities.TestVariables;
 import com.saucelabs.models.ItemDTO;
 import com.saucelabs.pages.CartPage;
 import com.saucelabs.verifiers.IBaseItemVerify;
@@ -11,8 +10,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-import static com.saucelabs.entities.TestVariables.INVENTORY_ITEM_XPATHS;
-import static com.saucelabs.entities.TestVariables.ONE_SECOND;
+import static com.saucelabs.entities.TestVariables.*;
 
 @Log4j2
 public class CartPageActions extends CartPage implements IBaseItemVerify {
@@ -21,11 +19,18 @@ public class CartPageActions extends CartPage implements IBaseItemVerify {
         super(driver);
     }
 
+    private void baseCartPageVerify() {
+        log.debug("Verifying cart page URL, 'Continue shopping' and 'Checkout' buttons.");
+        verifyUrl(CART_PAGE_URL);
+        waitUntilClickable(getCheckoutButton(), ONE_SECOND);
+        waitUntilClickable(getContinueShippingButton(), ONE_SECOND);
+    }
+
     @Override
     public void verifyCartPageWithItems(final List<ItemDTO> itemDTOS) {
         log.debug("Verifying cart page item with items count: {}.", itemDTOS.size());
         Assert.assertEquals(getCartBadgeCounterText(), String.valueOf(itemDTOS.size()));
-        verifyUIElements();
+        verifyCartPage();
         itemDTOS.forEach(itemDTO -> {
             log.debug("Verifying cart page item: {}.", itemDTO.getName());
             final WebElement item = getCartItemByName(itemDTO.getName());
@@ -35,17 +40,22 @@ public class CartPageActions extends CartPage implements IBaseItemVerify {
     }
 
     @Override
-    public void verifyUIElements() {
-        log.debug("Verifying UI elements.");
-        waitUntilClickable(getCheckoutButton(), ONE_SECOND);
+    public void verifyCartPage() {
+        log.debug("Verifying cart page elements.");
+        baseCartPageVerify();
         waitUntilClickable(getRemoveButton(), ONE_SECOND);
-        waitUntilClickable(getContinueShippingButton(), ONE_SECOND);
         waitUntilVisible(getCartBadgeCounter(), ONE_SECOND);
+    }
+
+    public void verifyPageWithEmptyCart() {
+        log.debug("Verifying cart page with empty cart.");
+        baseCartPageVerify();
+        Assert.assertEquals(getCartItems().size(), 0);
     }
 
     public void checkoutItems(final List<ItemDTO> itemDTOS) {
         log.debug("Checkout items.");
-        verifyLogoAndUrl(TestVariables.CART_PAGE_URL);
+        baseCartPageVerify();
         verifyCartPageWithItems(itemDTOS);
         clickOnCheckoutButton();
     }
