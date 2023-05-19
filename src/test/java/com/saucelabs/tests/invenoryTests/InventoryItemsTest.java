@@ -33,7 +33,7 @@ public class InventoryItemsTest extends LoggedUserBaseTest {
         shopPageActions.verifyItemsOpening();
     }
 
-    @Test(dependsOnGroups = "login")
+    @Test()
     void removingItemFromItemPageTest() {
         TestDataProvider.getFirstAndLastItemIndices().forEach(index -> {
             ShopPageActions shopPageActions = new ShopPageActions(driver);
@@ -47,8 +47,19 @@ public class InventoryItemsTest extends LoggedUserBaseTest {
         });
     }
 
-    // TODO
     @Test(dependsOnGroups = "login")
     void addingItemFromItemPageTest() {
+        int expectedBadgeCounter = 0;
+        for (Integer index : TestDataProvider.getFirstAndLastItemIndices()) {
+            ShopPageActions shopPageActions = new ShopPageActions(driver);
+            final ItemDTO itemToAdd = shopPageActions.clickOnItemByIndex(index + 1);
+
+            final ItemPageActions itemPageActions = new ItemPageActions(driver);
+            itemPageActions.addItemAndClickOnBackToProducts(itemToAdd, expectedBadgeCounter);
+            ++expectedBadgeCounter;
+
+            shopPageActions = new ShopPageActions(driver);
+            shopPageActions.verifyItemIsInCart(itemToAdd, expectedBadgeCounter);
+        }
     }
 }

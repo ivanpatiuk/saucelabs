@@ -15,12 +15,22 @@ public class ItemPageActions extends ItemPage implements IBadgeCounterVerify, IB
         super(driver);
     }
 
+    private void verifyAddOrRemoveItemAndBackToProducts(final ItemDTO itemDTO, final String expectedBadgeCounter, final String expectedButtonText) {
+        log.debug("Verifying item adding or removing from item page for: '{}'.", itemDTO.getName());
+        clickOnAddOrRemoveButton();
+        verifyCartBadge(getCartBadgeCounter(), expectedBadgeCounter);
+        verifyTextContains(getAddOrRemoveButton(), expectedButtonText);
+        verifyItemDescription(getItem(), itemDTO, INVENTORY_DETAILS_XPATHS);
+        clickOnBackToProductsButton();
+    }
+
     public void removeItemAndClickOnBackToProducts(final ItemDTO addedItem) {
         log.debug("Removing item from item page.");
-        clickOnAddOrRemoveButton();
-        verifyCartBadge(getCartBadgeCounter(), null);
-        verifyTextContains(getAddOrRemoveButton(), "Add to cart");
-        verifyItemDescription(getItem(), addedItem, INVENTORY_DETAILS_XPATHS);
-        clickOnBackToProductsButton();
+        verifyAddOrRemoveItemAndBackToProducts(addedItem, null, "Add to cart");
+    }
+
+    public void addItemAndClickOnBackToProducts(final ItemDTO clickedItem, final Integer expectedBadgeCounter) {
+        log.debug("Adding item from item page.");
+        verifyAddOrRemoveItemAndBackToProducts(clickedItem, String.valueOf(expectedBadgeCounter + 1), "Remove");
     }
 }

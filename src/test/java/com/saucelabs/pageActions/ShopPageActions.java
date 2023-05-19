@@ -52,6 +52,7 @@ public class ShopPageActions extends ShopPage implements IBadgeCounterVerify {
 
     private void verifyRemoveButton(final String itemName, final String expected) {
         log.debug("Verifying remove button for item: '{}'", itemName);
+        System.out.println(BY_ITEM.replace("<item_title>", itemName));
         final String buttonText = findElementBy(By.xpath(BY_ITEM.replace("<item_title>", itemName)), ONE_SECOND).getText();
         Assert.assertEquals(buttonText, expected);
     }
@@ -70,6 +71,16 @@ public class ShopPageActions extends ShopPage implements IBadgeCounterVerify {
         if (expectedCounter != 0) {
             verifyCartBadge(getCartBadgeCounter(), String.valueOf(expectedCounter));
         }
+    }
+
+    private ItemDTO clickOnItem(final WebElement itemFromShopPage) {
+        final ItemDTO itemBeforeClicking = ItemDTO.getItemDTO(itemFromShopPage, INVENTORY_ITEM_XPATHS);
+        final WebElement titleButton = itemFromShopPage.findElement(By.xpath(".//div[@class='inventory_item_label']/a[contains(@id,'link')]"));
+
+        waitUntilClickable(titleButton, ONE_SECOND);
+        titleButton.click();
+
+        return itemBeforeClicking;
     }
 
     public void verifyItemsRemoving() {
@@ -100,15 +111,15 @@ public class ShopPageActions extends ShopPage implements IBadgeCounterVerify {
     }
 
     public ItemDTO clickOnItemByName(final String itemName) {
-        log.debug("Clicking on item by item name: '{}'", itemName);
+        log.debug("Clicking on item by item name: '{}'.", itemName);
         final WebElement itemFromShopPage = findElementBy(By.xpath("//div[@class='inventory_item_label']//div[contains(text(), '" + itemName + "')]/ancestor::div[@class='inventory_item']"), ONE_SECOND);
-        final ItemDTO itemBeforeClicking = ItemDTO.getItemDTO(itemFromShopPage, INVENTORY_ITEM_XPATHS);
-        final WebElement titleButton = itemFromShopPage.findElement(By.xpath(".//div[@class='inventory_item_label']/a[contains(@id,'link')]"));
+        return clickOnItem(itemFromShopPage);
+    }
 
-        waitUntilClickable(titleButton, ONE_SECOND);
-        titleButton.click();
-
-        return itemBeforeClicking;
+    public ItemDTO clickOnItemByIndex(final Integer index) {
+        log.debug("Clicking on item by item index: {}.", index);
+        final WebElement itemFromShopPage = findElementBy(By.xpath("//div[@class='inventory_item'][" + index + "]"), ONE_SECOND);
+        return clickOnItem(itemFromShopPage);
     }
 
     public void verifyItemsOpening() {
@@ -139,6 +150,12 @@ public class ShopPageActions extends ShopPage implements IBadgeCounterVerify {
         log.debug("Verifying that item is not in the cart: '{}'", itemDTO.getName());
         verifyCartBadge(getCartBadgeCounter(), null);
         verifyRemoveButton(itemDTO.getName(), "Add to cart");
+    }
+
+    public void verifyItemIsInCart(final ItemDTO itemDTO, final Integer expectedBadgeCounter) {
+        log.debug("Verifying that item is in the cart: '{}'", itemDTO.getName());
+        verifyCartBadge(getCartBadgeCounter(), String.valueOf(expectedBadgeCounter));
+        verifyRemoveButton(itemDTO.getName(), "Remove");
     }
 
     public List<ItemDTO> addItemsToCartByIndices(final List<Integer> itemIndicesList) {
