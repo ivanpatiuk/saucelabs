@@ -4,7 +4,6 @@ import com.saucelabs.models.ItemDTO;
 import com.saucelabs.pageActions.CartPageActions;
 import com.saucelabs.pageActions.CheckoutPageOneActions;
 import com.saucelabs.pageActions.CheckoutPageTwoActions;
-import com.saucelabs.pageActions.ShopPageActions;
 import com.saucelabs.tests.TestDataProvider;
 import com.saucelabs.tests.baseTests.LoggedUserBaseTest;
 import org.testng.annotations.Test;
@@ -15,7 +14,6 @@ public class ItemsOrderingTest extends LoggedUserBaseTest {
 
     @Test(dependsOnGroups = "login", dataProviderClass = TestDataProvider.class, dataProvider = "itemIndicesDataProvider")
     void itemsCheckoutTest(final List<Integer> itemIndicesList) {
-        final ShopPageActions shopPageActions = new ShopPageActions(driver);
         final List<ItemDTO> itemDTOS = shopPageActions.addItemsToCartByIndices(itemIndicesList);
         shopPageActions.verifyClickingOnShoppingCart();
 

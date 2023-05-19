@@ -11,32 +11,27 @@ public class InventoryItemsTest extends LoggedUserBaseTest {
 
     @Test(dependsOnGroups = "login")
     void removingItemsTest() {
-        final ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.verifyItemsRemoving();
     }
 
     @Test(dependsOnGroups = "login")
     void sortingItemsTest() {
-        final ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.verifySorting(TestDataProvider.getOrderingTestDataList());
     }
 
     @Test(dependsOnGroups = "login")
     void itemsDescriptionTest() {
-        final ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.verifyDescription();
     }
 
     @Test(dependsOnGroups = "login")
     void openingItemTest() {
-        final ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.verifyItemsOpening();
     }
 
     @Test(dependsOnGroups = "login")
     void removingItemFromItemPageTest() {
         TestDataProvider.getFirstAndLastItemIndices().forEach(index -> {
-            ShopPageActions shopPageActions = new ShopPageActions(driver);
             final ItemDTO addedItem = shopPageActions.addItemToCartAndClickOnItem(index);
 
             final ItemPageActions itemPageActions = new ItemPageActions(driver);
@@ -51,7 +46,6 @@ public class InventoryItemsTest extends LoggedUserBaseTest {
     void addingItemFromItemPageTest() {
         int expectedBadgeCounter = 0;
         for (Integer index : TestDataProvider.getFirstAndLastItemIndices()) {
-            ShopPageActions shopPageActions = new ShopPageActions(driver);
             final ItemDTO itemToAdd = shopPageActions.clickOnItemByIndex(index + 1);
 
             final ItemPageActions itemPageActions = new ItemPageActions(driver);

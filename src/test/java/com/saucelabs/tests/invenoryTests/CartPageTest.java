@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 public class CartPageTest extends LoggedUserBaseTest {
     @Test(dependsOnGroups = "login")
     void emptyCartTest() {
-        final ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.clickOnShoppingCartButton();
 
         final CartPageActions cartPageActions = new CartPageActions(driver);
@@ -17,7 +16,6 @@ public class CartPageTest extends LoggedUserBaseTest {
 
     @Test(dependsOnGroups = "login")
     void continueShoppingWithEmptyCartTest() {
-        ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.clickOnShoppingCartButton();
 
         final CartPageActions cartPageActions = new CartPageActions(driver);
