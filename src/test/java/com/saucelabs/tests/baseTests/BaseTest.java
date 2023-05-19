@@ -1,4 +1,4 @@
-package com.saucelabs.tests;
+package com.saucelabs.tests.baseTests;
 
 import com.saucelabs.pages.base.BaseDriver;
 import com.saucelabs.testconfig.WebManager;

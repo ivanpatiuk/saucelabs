@@ -5,8 +5,8 @@ import com.saucelabs.pageActions.CartPageActions;
 import com.saucelabs.pageActions.CheckoutPageOneActions;
 import com.saucelabs.pageActions.CheckoutPageTwoActions;
 import com.saucelabs.pageActions.ShopPageActions;
-import com.saucelabs.tests.LoggedUserBaseTest;
 import com.saucelabs.tests.TestDataProvider;
+import com.saucelabs.tests.baseTests.LoggedUserBaseTest;
 import org.testng.annotations.Test;
 
 import java.util.List;

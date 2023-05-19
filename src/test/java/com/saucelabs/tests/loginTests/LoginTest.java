@@ -3,7 +3,7 @@ package com.saucelabs.tests.loginTests;
 import com.saucelabs.entities.TestVariables;
 import com.saucelabs.pageActions.HomePageActions;
 import com.saucelabs.pageActions.ShopPageActions;
-import com.saucelabs.tests.BaseTest;
+import com.saucelabs.tests.baseTests.BaseTest;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {

@@ -53,6 +53,12 @@ public class CartPageActions extends CartPage implements IBaseItemVerify {
         Assert.assertEquals(getCartItems().size(), 0);
     }
 
+    public void verifyContinuingShoppingWithEmptyCart() {
+        log.debug("Verifying clicking on 'Continue shopping' on cart page with empty cart.");
+        baseCartPageVerify();
+        clickOnShoppingCartButton();
+    }
+
     public void checkoutItems(final List<ItemDTO> itemDTOS) {
         log.debug("Checkout items.");
         baseCartPageVerify();

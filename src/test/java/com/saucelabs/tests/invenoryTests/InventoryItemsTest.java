@@ -3,8 +3,8 @@ package com.saucelabs.tests.invenoryTests;
 import com.saucelabs.models.ItemDTO;
 import com.saucelabs.pageActions.ItemPageActions;
 import com.saucelabs.pageActions.ShopPageActions;
-import com.saucelabs.tests.LoggedUserBaseTest;
 import com.saucelabs.tests.TestDataProvider;
+import com.saucelabs.tests.baseTests.LoggedUserBaseTest;
 import org.testng.annotations.Test;
 
 public class InventoryItemsTest extends LoggedUserBaseTest {

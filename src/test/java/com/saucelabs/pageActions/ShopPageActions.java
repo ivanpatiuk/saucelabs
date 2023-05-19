@@ -158,6 +158,15 @@ public class ShopPageActions extends ShopPage implements IBadgeCounterVerify {
         verifyRemoveButton(itemDTO.getName(), "Remove");
     }
 
+    public void verifyNoItemIsInCart() {
+        log.debug("Verifying no cart is in the cart.");
+        verifyCartBadge(getCartBadgeCounter(), null);
+        getInventoryItems().forEach(webElement -> {
+            ItemDTO itemDTO = ItemDTO.getItemDTO(webElement, INVENTORY_ITEM_XPATHS);
+            verifyRemoveButton(itemDTO.getName(), "Add to cart");
+        });
+    }
+
     public List<ItemDTO> addItemsToCartByIndices(final List<Integer> itemIndicesList) {
         log.debug("Adding items to the cart with indices: {}", itemIndicesList);
         final List<ItemDTO> itemDTOS = new ArrayList<>();

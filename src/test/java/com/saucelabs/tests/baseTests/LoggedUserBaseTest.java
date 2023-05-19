@@ -1,4 +1,4 @@
-package com.saucelabs.tests;
+package com.saucelabs.tests.baseTests;
 
 import com.saucelabs.entities.TestVariables;
 import com.saucelabs.pageActions.HomePageActions;
