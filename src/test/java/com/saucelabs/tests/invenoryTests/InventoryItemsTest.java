@@ -33,7 +33,7 @@ public class InventoryItemsTest extends LoggedUserBaseTest {
         shopPageActions.verifyItemsOpening();
     }
 
-    @Test()
+    @Test(dependsOnGroups = "login")
     void removingItemFromItemPageTest() {
         TestDataProvider.getFirstAndLastItemIndices().forEach(index -> {
             ShopPageActions shopPageActions = new ShopPageActions(driver);
