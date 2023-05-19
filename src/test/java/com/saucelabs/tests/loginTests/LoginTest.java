@@ -9,13 +9,13 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest {
 
     @Test(groups = "login")
-    void loginStandardUserTestShouldSuccess() {
+    void successfulLoginStandardUserTest() {
         final HomePageActions homePageActions = new HomePageActions(driver);
         homePageActions.successfulLogin(TestVariables.STANDARD_USERNAME, TestVariables.VALID_PASSWORD);
     }
 
     @Test(groups = "login")
-    void logoutStandardUserTestShouldSuccess() {
+    void logoutStandardUserTest() {
         final HomePageActions homePageActions = new HomePageActions(driver);
         homePageActions.successfulLogin(TestVariables.STANDARD_USERNAME, TestVariables.VALID_PASSWORD);
 
@@ -24,7 +24,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(groups = "login")
-    void loginStandardUserTestShouldFail() {
+    void unsuccessfulLoginStandardUserTest() {
         final HomePageActions homePageActions = new HomePageActions(driver);
         homePageActions.unsuccessfulLogin(TestVariables.STANDARD_USERNAME, TestVariables.NOT_VALID_PASSWORD);
     }
@@ -36,13 +36,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(groups = "login")
-    void loginProblemUserTestShouldSuccess() {
+    void successfulLoginProblemUserTest() {
         HomePageActions homePageActions = new HomePageActions(driver);
         homePageActions.successfulLogin(TestVariables.PROBLEM_USERNAME, TestVariables.VALID_PASSWORD);
     }
-//    @Test(groups = {"login", "performance"})
-//    void loginPerformanceGlitchUserShouldFailTest() {
-//        login(driver, PERFORMANCE_GLITCH_USERNAME, VALID_PASSWORD);
-//        verifyUrl(driver, SHOP_PAGE_URL);
-//    }
 }

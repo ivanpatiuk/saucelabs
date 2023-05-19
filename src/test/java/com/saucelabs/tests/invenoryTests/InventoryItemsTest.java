@@ -10,25 +10,25 @@ import org.testng.annotations.Test;
 public class InventoryItemsTest extends LoggedUserBaseTest {
 
     @Test(dependsOnGroups = "login")
-    void removingItemsTestShouldSuccess() {
+    void removingItemsTest() {
         final ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.verifyItemsRemoving();
     }
 
     @Test(dependsOnGroups = "login")
-    void sortingTestShouldSuccess() {
+    void sortingItemsTest() {
         final ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.verifySorting(TestDataProvider.getOrderingTestDataList());
     }
 
     @Test(dependsOnGroups = "login")
-    void descriptionTestShouldSuccess() {
+    void itemsDescriptionTest() {
         final ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.verifyDescription();
     }
 
     @Test(dependsOnGroups = "login")
-    void openingItemTestShouldSuccess() {
+    void openingItemTest() {
         final ShopPageActions shopPageActions = new ShopPageActions(driver);
         shopPageActions.verifyItemsOpening();
     }

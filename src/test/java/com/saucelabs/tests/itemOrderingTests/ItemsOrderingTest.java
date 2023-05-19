@@ -14,7 +14,7 @@ import java.util.List;
 public class ItemsOrderingTest extends LoggedUserBaseTest {
 
     @Test(dependsOnGroups = "login", dataProviderClass = TestDataProvider.class, dataProvider = "itemIndicesDataProvider")
-    void orderItemsTestShouldSuccess(final List<Integer> itemIndicesList) {
+    void itemsCheckoutTest(final List<Integer> itemIndicesList) {
         final ShopPageActions shopPageActions = new ShopPageActions(driver);
         final List<ItemDTO> itemDTOS = shopPageActions.addItemsToCartByIndices(itemIndicesList);
         shopPageActions.verifyClickingOnShoppingCart();
@@ -28,11 +28,4 @@ public class ItemsOrderingTest extends LoggedUserBaseTest {
         final CheckoutPageTwoActions checkoutPageTwoActions = new CheckoutPageTwoActions(driver);
         checkoutPageTwoActions.finishCheckout(itemDTOS);
     }
-
-//    @Test (dependsOnGroups = "login")
-//    void removingItemTestShouldSuccess(){
-//        final Cart cart = new Cart(driver);
-//        ca shop = new Shop(driver);
-//        shop.verifyItemsRemovingFromShopPage();
-//    }
 }
