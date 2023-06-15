@@ -1,0 +1,11 @@
+test-site-address: https://www.saucedemo.com/
+
+users-credentials:
+  tested-user-name: standard_user
+  standard-user-name: standard_user
+  locked-out-user-name: locked_out_user
+  problem-user-name: problem_user
+  performance_glitch_user-name: performance_glitch_user
+  password: secret_sauce
+
+
